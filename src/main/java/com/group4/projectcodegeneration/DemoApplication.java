@@ -1,4 +1,4 @@
-package com.group4.demo;
+package com.group4.projectcodegeneration;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

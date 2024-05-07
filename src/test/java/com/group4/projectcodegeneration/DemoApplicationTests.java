@@ -1,4 +1,4 @@
-package com.group4.demo;
+package com.group4.projectcodegeneration;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
