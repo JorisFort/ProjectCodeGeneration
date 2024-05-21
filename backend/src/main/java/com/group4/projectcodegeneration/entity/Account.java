@@ -1,9 +1,9 @@
 package com.group4.projectcodegeneration.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
+@Data
 @Entity
 public class Account {
 

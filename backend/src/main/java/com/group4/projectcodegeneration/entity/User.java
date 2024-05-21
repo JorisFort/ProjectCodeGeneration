@@ -1,10 +1,11 @@
 package com.group4.projectcodegeneration.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
+@Data
 @Entity
+@Table(name = "Users")
 public class User {
 
     @Id
