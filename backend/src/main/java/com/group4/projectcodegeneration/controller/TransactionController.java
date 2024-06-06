@@ -1,6 +1,6 @@
 package com.group4.projectcodegeneration.controller;
 
-import com.group4.projectcodegeneration.entity.Transaction;
+import com.group4.projectcodegeneration.model.Transaction;
 import com.group4.projectcodegeneration.service.TransactionService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +21,12 @@ public class TransactionController {
     public ResponseEntity<Transaction> createTransaction(@RequestBody Transaction transaction) {
         Transaction createdTransaction = transactionService.createTransaction(transaction);
         return ResponseEntity.status(201).body(createdTransaction);
+    }
+
+    @GetMapping
+    public ResponseEntity<Iterable<Transaction>> getAllTransactions() {
+        Iterable<Transaction> transactions = transactionService.getAllTransactions();
+        return ResponseEntity.ok(transactions);
     }
 
     @GetMapping("/{transactionId}")

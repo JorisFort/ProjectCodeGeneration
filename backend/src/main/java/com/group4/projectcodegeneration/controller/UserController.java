@@ -1,6 +1,6 @@
 package com.group4.projectcodegeneration.controller;
 
-import com.group4.projectcodegeneration.entity.User;
+import com.group4.projectcodegeneration.model.User;
 import com.group4.projectcodegeneration.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

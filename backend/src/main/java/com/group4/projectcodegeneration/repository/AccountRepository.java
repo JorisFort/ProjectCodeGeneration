@@ -1,7 +1,10 @@
 package com.group4.projectcodegeneration.repository;
 
-import com.group4.projectcodegeneration.entity.Account;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.group4.projectcodegeneration.model.Account;
+import org.springframework.data.repository.CrudRepository;
 
-public interface AccountRepository extends JpaRepository<Account, Long> {
+import java.util.Optional;
+
+public interface AccountRepository extends CrudRepository<Account, Long> {
+    Optional<Account> findByIban(String iban);
 }

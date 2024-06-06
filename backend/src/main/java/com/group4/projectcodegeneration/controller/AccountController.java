@@ -1,6 +1,6 @@
 package com.group4.projectcodegeneration.controller;
 
-import com.group4.projectcodegeneration.entity.Account;
+import com.group4.projectcodegeneration.model.Account;
 import com.group4.projectcodegeneration.service.AccountService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

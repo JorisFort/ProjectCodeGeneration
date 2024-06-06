@@ -1,4 +1,4 @@
-package com.group4.projectcodegeneration.entity;
+package com.group4.projectcodegeneration.model;
 
 import jakarta.persistence.*;
 import lombok.Data;

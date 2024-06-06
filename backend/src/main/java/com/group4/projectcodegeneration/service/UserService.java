@@ -1,6 +1,6 @@
 package com.group4.projectcodegeneration.service;
 
-import com.group4.projectcodegeneration.entity.User;
+import com.group4.projectcodegeneration.model.User;
 import com.group4.projectcodegeneration.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +17,10 @@ public class UserService {
 
     public User createUser(User user) {
         return userRepository.save(user);
+    }
+
+    public Iterable<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
     public Optional<User> getUserById(Long userId) {

@@ -1,6 +1,6 @@
 package com.group4.projectcodegeneration.service;
 
-import com.group4.projectcodegeneration.entity.Transaction;
+import com.group4.projectcodegeneration.model.Transaction;
 import com.group4.projectcodegeneration.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +17,10 @@ public class TransactionService {
 
     public Transaction createTransaction(Transaction transaction) {
         return transactionRepository.save(transaction);
+    }
+
+    public Iterable<Transaction> getAllTransactions() {
+        return transactionRepository.findAll();
     }
 
     public Optional<Transaction> getTransactionById(Long transactionId) {

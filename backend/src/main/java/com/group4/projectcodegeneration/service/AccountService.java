@@ -1,7 +1,8 @@
 package com.group4.projectcodegeneration.service;
 
-import com.group4.projectcodegeneration.entity.Account;
+import com.group4.projectcodegeneration.model.Account;
 import com.group4.projectcodegeneration.repository.AccountRepository;
+import com.group4.projectcodegeneration.util.IbanGenerator;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -16,6 +17,12 @@ public class AccountService {
     }
 
     public Account createAccount(Account account) {
+        String iban = IbanGenerator.generateIban();
+        while (accountRepository.findByIban(iban).isPresent()) {
+            iban = IbanGenerator.generateIban();
+        }
+        account.setIban(iban);
+
         return accountRepository.save(account);
     }
 

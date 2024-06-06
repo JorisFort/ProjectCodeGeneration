@@ -1,8 +1,10 @@
 package com.group4.projectcodegeneration.repository;
 
-import com.group4.projectcodegeneration.entity.User;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.group4.projectcodegeneration.model.User;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+@Repository
+public interface UserRepository extends CrudRepository<User, Long> {
     User findByUsername(String username);
 }

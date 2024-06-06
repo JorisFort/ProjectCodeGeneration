@@ -1,6 +1,6 @@
 package com.group4.projectcodegeneration.service;
 
-import com.group4.projectcodegeneration.entity.Employee;
+import com.group4.projectcodegeneration.model.Employee;
 import com.group4.projectcodegeneration.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 

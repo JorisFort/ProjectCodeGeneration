@@ -1,7 +1,10 @@
 package com.group4.projectcodegeneration.repository;
 
-import com.group4.projectcodegeneration.entity.Customer;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.group4.projectcodegeneration.model.Customer;
+import org.springframework.data.repository.CrudRepository;
 
-public interface CustomerRepository extends JpaRepository<Customer, Long> {
+import java.util.Iterator;
+
+public interface CustomerRepository extends CrudRepository<Customer, Long> {
+    Iterator<Customer> findByAccountApprovedFalse();
 }
