@@ -1,24 +1,27 @@
-<script setup>
-import { RouterView, RouterLink } from "vue-router";
-</script>
-
 <template>
-  <main class="container">
+  <div id="app">
     <nav>
-      <ul>
-        <li><strong>Bill's Bank and Used Car Sales</strong></li>
-      </ul>
-      <ul>
-        <li>
-          <RouterLink to="/">Home</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/api-test">API Test</RouterLink>
-        </li>
-      </ul>
+      <router-link to="/">Home</router-link> |
+      <router-link to="/api-test">API Test</router-link> |
+      <router-link to="/login">Login</router-link> |
+      <router-link to="/register">Register</router-link> |
+      <router-link to="/transfer-funds">Transfer Funds</router-link> |
+      <router-link to="/transfer-between-accounts"
+        >Transfer Between Accounts</router-link
+      >
+      | <router-link to="/dashboard/overview">Dashboard</router-link> |
+      <router-link to="/dashboard/transactions">Transactions</router-link> |
+      <router-link to="/dashboard/account-details">Profile</router-link>
+      <!-- Add link to account details -->
     </nav>
-    <RouterView></RouterView>
-  </main>
+    <router-view></router-view>
+  </div>
 </template>
 
-<style scoped></style>
+<script setup></script>
+
+<style scoped>
+nav {
+  margin-bottom: 1rem;
+}
+</style>
