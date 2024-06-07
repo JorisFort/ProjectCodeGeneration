@@ -1,5 +1,6 @@
 <script setup>
 import EmployeeNavigation from "../common/EmployeeNavigation.vue";
+import EmployeeTransactionOverview from "../containers/EmployeeTransactionOverview.vue"
 </script>
 
 <template>
@@ -8,6 +9,7 @@ import EmployeeNavigation from "../common/EmployeeNavigation.vue";
     <EmployeeNavigation />
   </div>
   <div class="employeeContent">
+    <EmployeeTransactionOverview/>
   </div>
 
 </template>
