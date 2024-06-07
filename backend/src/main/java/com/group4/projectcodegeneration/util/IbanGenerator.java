@@ -1,5 +1,6 @@
 package com.group4.projectcodegeneration.util;
 
+import java.math.BigInteger;
 import java.util.Random;
 
 public class IbanGenerator {
@@ -30,7 +31,8 @@ public class IbanGenerator {
         for (int i = 0; i < rearranged.length(); i++) {
             numeric.append(Character.getNumericValue(rearranged.charAt(i)));
         }
-        int modResult = Integer.parseInt(numeric.toString()) % 97;
+        BigInteger bigInt = new BigInteger(numeric.toString());
+        int modResult = bigInt.mod(new BigInteger("97")).intValue();
         return String.format("%02d", 98 - modResult);
     }
 }
