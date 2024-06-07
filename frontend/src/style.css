@@ -46,3 +46,13 @@ aside ul li {
     position: fixed;
     right: 8vw;
 }
+
+.employeeButton {
+    width: 20vw;
+}
+
+.employeeDeletionButton {
+    width: 10vw;
+    height: 60px;
+    margin-right: 50px;
+}
