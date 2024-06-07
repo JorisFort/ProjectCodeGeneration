@@ -12,7 +12,6 @@ ENV PATH=/opt/gradle/gradle-8.5/bin:$PATH
 COPY . .
 
 RUN gradle wrapper
-RUN echo "org.gradle.daemon=false" >> /app/gradle.properties # Disable the Gradle daemon
 RUN ./gradlew clean build -x test
 
 EXPOSE 8080
