@@ -9,23 +9,13 @@ RUN wget https://services.gradle.org/distributions/gradle-8.8-bin.zip -P /tmp \
     && rm /tmp/gradle-8.8-bin.zip
 ENV PATH=/opt/gradle/gradle-8.8/bin:$PATH
 
-# Set working directory
-WORKDIR /app
+COPY . .
 
-# Copy only necessary files
-COPY backend /app
-
-# Generate Gradle wrapper
 RUN gradle wrapper
-
 # Disable the Gradle daemon
 RUN echo "org.gradle.daemon=false" >> /app/gradle.properties
 
-# Build the project
 RUN ./gradlew clean build -x test
 
-# Expose the application port
 EXPOSE 8080
-
-# Command to run the application
 ENTRYPOINT ["./gradlew", "bootRun"]
