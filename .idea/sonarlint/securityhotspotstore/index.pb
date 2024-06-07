@@ -11,3 +11,7 @@ F
 frontend/src/Router.js,5/2/5281e9319cb35ead4f47a139551565d3f684f144
 D
 frontend/src/main.js,d/1/d1299ed3361f95740f5851dbc9577d6b7158ec49
+B
+frontend/README.md,6/a/6a3a36e34dda2b89c027f00ac950371695b13c75
+Y
+)frontend/src/components/pages/ATMpage.vue,0/2/02c2fbbb200365b4da5ea4340315dd2fb51af1f8

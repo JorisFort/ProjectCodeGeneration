@@ -1,3 +1,4 @@
+/* Login Page Styles */
 .login-container {
     max-width: 400px;
     margin: 0 auto;
@@ -42,4 +43,42 @@ p {
     color: red;
     margin-top: 1em;
     text-align: center;
+}
+
+/* ATM Page Styles */
+.atm-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1em;
+}
+
+.welcome-message, .date-time {
+    font-size: 1.2em;
+}
+
+.atm-actions button {
+    margin: 0.5em;
+    padding: 1em;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+main {
+    text-align: center;
+}
+
+input[type="number"] {
+    margin: 1em 0;
+    padding: 0.5em;
+    font-size: 1em;
+    width: 100%;
 }
