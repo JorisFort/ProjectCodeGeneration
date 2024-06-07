@@ -1,60 +1,55 @@
 <template>
   <div class="login-container">
     <h2>Login</h2>
-    <form @submit.prevent="handleSubmit">
+    <form @submit.prevent="login">
       <div class="form-group">
-        <label for="username">Username</label>
-        <input
-            type="text"
-            id="username"
-            v-model="username"
-            required
-        />
+        <label for="identifier">Username or Email</label>
+        <input type="text" id="identifier" v-model="identifier" required />
       </div>
       <div class="form-group">
         <label for="password">Password</label>
-        <input
-            type="password"
-            id="password"
-            v-model="password"
-            required
-        />
+        <input type="password" id="password" v-model="password" required />
       </div>
       <button type="submit">Login</button>
+      <p v-if="errorMessage">{{ errorMessage }}</p>
     </form>
-    <p v-if="errorMessage">{{ errorMessage }}</p>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue';
+import axios from 'axios';
 
 export default {
-  name: 'Login',
-  setup() {
-    const username = ref('');
-    const password = ref('');
-    const errorMessage = ref('');
-
-    const handleSubmit = () => {
-      if (!username.value || !password.value) {
-        errorMessage.value = 'Please fill in both fields';
-      } else {
-        // Perform login action here
-        // For example, you can call an API to validate the user credentials
-        // Assuming login is successful:
-        errorMessage.value = '';
-        alert(`Logged in as: ${username.value}`);
-        // You can redirect to another page or perform any action here
-      }
-    };
-
+  name: 'LoginPage',
+  data() {
     return {
-      username,
-      password,
-      errorMessage,
-      handleSubmit,
+      identifier: '',
+      password: '',
+      errorMessage: ''
     };
   },
+  methods: {
+    async login() {
+      try {
+        const response = await axios.post('https://your-api-url.com/login', {
+          identifier: this.identifier,
+          password: this.password
+        });
+
+        // Assuming the API response contains a JWT token and user email
+        const { token, email } = response.data;
+
+        // Store the JWT token in localStorage or vuex
+        localStorage.setItem('token', token);
+        localStorage.setItem('email', email);
+
+        // Redirect to the ATM page or any other page
+        this.$router.push('/atm');
+      } catch (error) {
+        // Handle error and display message
+        this.errorMessage = 'Invalid username/email or password. Please try again.';
+      }
+    }
+  }
 };
 </script>

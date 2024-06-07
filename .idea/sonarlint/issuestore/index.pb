@@ -15,3 +15,15 @@ B
 frontend/README.md,6/a/6a3a36e34dda2b89c027f00ac950371695b13c75
 Y
 )frontend/src/components/pages/ATMpage.vue,0/2/02c2fbbb200365b4da5ea4340315dd2fb51af1f8
+Z
+*frontend/src/components/pages/HomePage.vue,e/4/e4423dd8b3b083ea2e0fd3228289bd805f9cc3cf
+]
+-frontend/src/components/pages/ApiTestPage.vue,e/8/e888c3808bc53cbf3a3733ef1ebbe5700f7c50d1
+l
+<frontend/src/components/containers/TransactionsContainer.vue,1/5/15e0e5e7be58ae73e6ff0cf59bf321b72a60a948
+\
+,frontend/src/components/common/AboutBill.vue,b/5/b5d8088d857834dab6528b7fae13a2027460cca9
+Z
+*frontend/src/components/common/Loading.vue,1/0/10019d3596b51c17f66ceb23dac1fdb2d1e39c60
+d
+4frontend/src/components/common/TransactionsTable.vue,6/7/67d034e40ed2a6764171794e6638dbb9797de456
