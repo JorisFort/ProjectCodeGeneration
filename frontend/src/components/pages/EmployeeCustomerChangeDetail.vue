@@ -13,6 +13,10 @@ const id = useRoute().params.id;
   <div class="employeeContent">
     <div>
       <router-link :to="{ name:'EmployeeCustomerDetail', params: { id: id} }" class="backButton"><button>Back</button></router-link>
+    </div>
+    <div>
+      <EmployeeCustomerChangeDetailForm :id = "id"/>
+    </div>
   </div>
 
 </template>
