@@ -27,7 +27,7 @@ const routes = [
   { path: "/employeeEditAccount", component: EmployeeEditAccount },
   { path: "/employeeCustomerDetail/:id", name: 'EmployeeCustomerDetail', component: EmployeeCustomerDetail},
   { path: "/employeeCustomerChangeDetail/:id", name: 'EmployeeCustomerChangeDetail', component: EmployeeCustomerChangeDetail},
-  { path: "/employeeCustomerTransactions/:id/:name", name: 'EmployeeCustomerTransactions', component: EmployeeCustomerTransactions}
+  { path: "/employeeCustomerTransactions/:id", name: 'EmployeeCustomerTransactions', component: EmployeeCustomerTransactions}
 ];
 
 const router = createRouter({

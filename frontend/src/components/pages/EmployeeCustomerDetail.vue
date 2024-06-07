@@ -35,6 +35,7 @@ const deleteAccount = () => {
         <EmployeeCustomerDetailOverview :id = "id"/>
       </div>
       <div class="grid">
+        <router-link :to="{ name: 'EmployeeCustomerTransactions', params: { id: id }}"><button class="employeeButton">View all Transactions</button></router-link>
         <button @click="confirmingDeletion" class="employeeButton">Close account</button>
       </div>
     </div>
