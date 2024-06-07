@@ -1,0 +1,48 @@
+
+.dashboardSquare {
+    background-color: #CCDBEC;
+    color: black;
+    padding: 25px;
+    border-radius: 15px;
+    width: 320px;
+}
+
+.dashboardSquare p {
+    color: black;
+}
+
+#dashboardTransactionChart {
+    width: 355px;
+    height: 300px;
+    background-color: darkolivegreen;
+}
+
+#dashboardNewAccountChart {
+    width: 575px;
+    height: 300px;
+    background-color: antiquewhite;
+}
+
+.employeeNavBar {
+    width: 15vw;
+    height: 100%;
+    position: fixed;
+}
+
+.employeeContent {
+    padding-top: 8vh;
+    padding-left: 15vw;
+}
+
+.employeeContent div {
+    margin-bottom: 35px;
+}
+
+aside ul li {
+    padding-bottom: 5vh;
+}
+
+.backButton {
+    position: fixed;
+    right: 8vw;
+}
