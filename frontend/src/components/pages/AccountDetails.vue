@@ -1,27 +1,23 @@
-<!-- src/components/pages/AccountDetails.vue -->
 <template>
   <div class="account-details">
     <Sidebar />
     <div class="main-content">
-      <header class="header">
-        <h1>Profile</h1>
-        <div class="user-info">
-          <span class="username">John Doe</span>
-          <span class="account-number">1234567890</span>
-        </div>
-      </header>
-      <UserProfile />
-      <AccountBalanceUser />
-      <RecentTransactions />
+      <div class="left-section">
+        <UserProfile />
+      </div>
+      <div class="right-section">
+        <AccountBalanceUser />
+        <RecentTransactions />
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import Sidebar from "../Sidebar.vue";
+//import Sidebar from "../Sidebar.vue";
 import UserProfile from "../UserProfile.vue";
 import AccountBalanceUser from "../AccountBalanceUser.vue";
-import RecentTransactions from "../RecentTransactions.vue"; // Ensure this path is correct
+import RecentTransactions from "../RecentTransactions.vue";
 </script>
 
 <style scoped>
@@ -30,24 +26,18 @@ import RecentTransactions from "../RecentTransactions.vue"; // Ensure this path 
 }
 .main-content {
   flex: 1;
+  display: flex;
   padding: 2rem;
   background: #f7f9fc;
 }
-.header {
+.left-section {
+  flex: 1.5; /* Increase the flex ratio to make it wider */
+  max-width: 400px; /* Increase max-width for more width */
+  padding-right: 2rem; /* Keeps some spacing between the sections */
+}
+.right-section {
+  flex: 2;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-}
-.user-info {
-  text-align: right;
-}
-.username {
-  display: block;
-  font-weight: bold;
-}
-.account-number {
-  display: block;
-  color: #999;
+  flex-direction: column;
 }
 </style>

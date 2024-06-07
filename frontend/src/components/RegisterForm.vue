@@ -90,9 +90,9 @@ const handleRegister = () => {
 
 <style scoped>
 .register-form {
-  max-width: 300px; /* Reduced width */
-  margin: 2rem auto; /* Add top margin to ensure it's not too close to the nav */
-  padding: 1rem; /* Reduced padding */
+  max-width: 300px; 
+  margin: 2rem auto; 
+  padding: 1rem; 
   border: 1px solid #ccc;
   border-radius: 5px;
   background: #fff;
@@ -105,7 +105,7 @@ label {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: bold;
-  font-size: 0.875rem; /* Slightly smaller font */
+  font-size: 0.875rem; 
 }
 input[type="text"],
 input[type="email"],
@@ -114,26 +114,26 @@ input[type="password"] {
   padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 5px;
-  font-size: 0.875rem; /* Slightly smaller font */
+  font-size: 0.875rem; 
 }
 .terms {
   margin-bottom: 1rem;
-  font-size: 0.875rem; /* Slightly smaller font */
+  font-size: 0.875rem; 
 }
 button {
   width: 100%;
-  padding: 0.5rem; /* Reduced padding */
+  padding: 0.5rem; 
   border: none;
   background-color: #28a745;
   color: #fff;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 0.875rem; /* Slightly smaller font */
+  font-size: 0.875rem; 
 }
 a {
   color: #007bff;
   text-decoration: none;
-  font-size: 0.875rem; /* Slightly smaller font */
+  font-size: 0.875rem; 
 }
 a:hover {
   text-decoration: underline;

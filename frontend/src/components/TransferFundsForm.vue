@@ -6,8 +6,8 @@
         <label for="account">Account</label>
         <select id="account" v-model="account" required>
           <option disabled value="">Account Name</option>
-          <option>Account 1</option>
-          <option>Account 2</option>
+          <option>Checking</option>
+          <option>Savings</option>
         </select>
       </div>
       <div class="input-group">
@@ -40,26 +40,14 @@
           required
         />
       </div>
-      <div class="input-group double">
-        <div>
-          <label for="transfer-date">Transfer date</label>
-          <input
-            type="text"
-            id="transfer-date"
-            v-model="transferDate"
-            placeholder="MM/YY"
-            required
-          />
-        </div>
-        <div>
-          <label for="description">Description</label>
-          <input
-            type="text"
-            id="description"
-            v-model="description"
-            placeholder="Description"
-          />
-        </div>
+      <div class="input-group">
+        <label for="description">Description</label>
+        <input
+          type="text"
+          id="description"
+          v-model="description"
+          placeholder="Description"
+        />
       </div>
       <div class="button-group">
         <button type="button" class="cancel">Cancel</button>
@@ -76,24 +64,21 @@ const account = ref("");
 const amount = ref("");
 const cardNumber = ref("");
 const cardHolderName = ref("");
-const transferDate = ref("");
 const description = ref("");
 
 const handleTransfer = () => {
-  // Transfer logic here
   console.log("Account:", account.value);
   console.log("Amount:", amount.value);
   console.log("Card Number:", cardNumber.value);
   console.log("Card Holder Name:", cardHolderName.value);
-  console.log("Transfer Date:", transferDate.value);
   console.log("Description:", description.value);
 };
 </script>
 
 <style scoped>
 .transfer-funds-form {
-  max-width: 400px; /* Adjust width as needed */
-  margin: 2rem auto;
+  max-width: 800px;
+  margin: 0.1rem auto;
   padding: 2rem;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -101,19 +86,13 @@ const handleTransfer = () => {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .input-group {
-  margin-bottom: 1rem;
-}
-.input-group.double {
-  display: flex;
-  justify-content: space-between;
-}
-.input-group.double div {
-  width: 48%;
+  margin-bottom: 0.1rem;
 }
 label {
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.1rem;
   font-weight: bold;
+  font-size: 0.75rem;
 }
 input[type="text"],
 select {
@@ -121,6 +100,7 @@ select {
   padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 5px;
+  font-size: 0.75rem;
 }
 .button-group {
   display: flex;
@@ -132,7 +112,7 @@ select {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 0.875rem; /* Slightly smaller font */
+  font-size: 0.75rem; /* Smaller font size */
 }
 .button-group .cancel {
   background-color: #ccc;

@@ -1,27 +1,24 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/api-test">API Test</router-link> |
-      <router-link to="/login">Login</router-link> |
-      <router-link to="/register">Register</router-link> |
-      <router-link to="/transfer-funds">Transfer Funds</router-link> |
-      <router-link to="/transfer-between-accounts"
-        >Transfer Between Accounts</router-link
-      >
-      | <router-link to="/dashboard/overview">Dashboard</router-link> |
-      <router-link to="/dashboard/transactions">Transactions</router-link> |
-      <router-link to="/dashboard/account-details">Profile</router-link>
-      <!-- Add link to account details -->
-    </nav>
-    <router-view></router-view>
+    <Sidebar />
+    <div class="content">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import Sidebar from "./components/Sidebar.vue";
+</script>
 
 <style scoped>
-nav {
-  margin-bottom: 1rem;
+#app {
+  display: flex; /* flexbox to align sidebar and content */
+  height: 100vh; /* full viewport height */
+}
+
+.content {
+  flex: 1; /* takes up the remaining space */
+  overflow-y: auto; /* adds scrolling to the main content only */
 }
 </style>
