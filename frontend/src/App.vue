@@ -1,5 +1,5 @@
 <script setup>
-import { RouterView, RouterLink } from "vue-router";
+import { RouterView, RouterLink } from 'vue-router';
 </script>
 
 <template>
@@ -14,6 +14,12 @@ import { RouterView, RouterLink } from "vue-router";
         </li>
         <li>
           <RouterLink to="/api-test">API Test</RouterLink>
+        </li>
+        <li>
+          <RouterLink to="/login">Login</RouterLink>
+        </li>
+        <li>
+          <RouterLink to="/atm">ATM</RouterLink>
         </li>
       </ul>
     </nav>
