@@ -13,12 +13,12 @@ import Sidebar from "./components/Sidebar.vue";
 
 <style scoped>
 #app {
-  display: flex; /* flexbox to align sidebar and content */
-  height: 100vh; /* full viewport height */
+  display: flex; /* Flexbox to align sidebar and content */
+  height: 100vh; /* Full viewport height */
 }
 
 .content {
-  flex: 1; /* takes up the remaining space */
-  overflow-y: auto; /* adds scrolling to the main content only */
+  flex: 1; /* Takes up the remaining space */
+  overflow-y: auto; /* Adds scrolling to the main content only */
 }
 </style>
