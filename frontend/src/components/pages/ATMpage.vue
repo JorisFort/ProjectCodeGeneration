@@ -1,7 +1,7 @@
 <template>
   <div class="atm-container">
     <header>
-      <span class="welcome-message">Welcome, {{ userName }}</span>
+      <span class="welcome-message">Welcome, {{ email }}</span>
       <span class="date-time">{{ currentDateTime }}</span>
     </header>
     <main>
@@ -28,12 +28,12 @@ import axios from 'axios';
 export default {
   name: 'ATM',
   setup() {
-    const userName = 'User';  // Replace with actual user name if available
+    const email = localStorage.getItem('email');  // Get email from localStorage
     const currentDateTime = ref('');
     const action = ref('');
     const amount = ref(0);
     const balance = ref(0);  // Initial balance set to 0
-    const token = ref('');
+    const token = localStorage.getItem('token');  // Get token from localStorage
 
     const updateDateTime = () => {
       const now = new Date();
@@ -52,27 +52,27 @@ export default {
       }
 
       try {
+        let response;
         if (action.value === 'withdraw') {
           if (amount.value > balance.value) {
             alert('Insufficient balance.');
+            return;
           } else {
-            const response = await axios.post(
-                'https://api.example.com/withdraw',
+            response = await axios.post(
+                'http://localhost:4000/withdraw',
                 { amount: amount.value },
-                { headers: { Authorization: `Bearer ${token.value}` } }
+                { headers: { Authorization: `Bearer ${token}` } }
             );
-            balance.value = response.data.balance;
-            alert(`Successfully withdrew ${amount.value} units.`);
           }
         } else if (action.value === 'deposit') {
-          const response = await axios.post(
-              'https://api.example.com/deposit',
+          response = await axios.post(
+              'http://localhost:4000/deposit',
               { amount: amount.value },
-              { headers: { Authorization: `Bearer ${token.value}` } }
+              { headers: { Authorization: `Bearer ${token}` } }
           );
-          balance.value = response.data.balance;
-          alert(`Successfully deposited ${amount.value} units.`);
         }
+        balance.value = response.data.balance;
+        alert(`Successfully ${action.value}ed ${amount.value} units.`);
       } catch (error) {
         console.error(error);
         alert('An error occurred while performing the action.');
@@ -82,22 +82,10 @@ export default {
       action.value = '';  // Reset action after performing it
     };
 
-    const fetchToken = async () => {
-      try {
-        const response = await axios.post('https://api.example.com/authenticate', {
-          username: 'your-username',  // Replace with actual username
-          password: 'your-password'   // Replace with actual password
-        });
-        token.value = response.data.token;
-      } catch (error) {
-        console.error('Error fetching token:', error);
-      }
-    };
-
     const fetchBalance = async () => {
       try {
-        const response = await axios.get('https://api.example.com/balance', {
-          headers: { Authorization: `Bearer ${token.value}` }
+        const response = await axios.get('http://localhost:4000/balance', {
+          headers: { Authorization: `Bearer ${token}` }
         });
         balance.value = response.data.balance;
       } catch (error) {
@@ -108,12 +96,11 @@ export default {
     onMounted(async () => {
       updateDateTime();
       setInterval(updateDateTime, 1000);  // Update every second
-      await fetchToken();
       await fetchBalance();
     });
 
     return {
-      userName,
+      email,
       currentDateTime,
       action,
       amount,
@@ -125,6 +112,3 @@ export default {
 };
 </script>
 
-<style scoped>
-@import '../style.css';
-</style>
