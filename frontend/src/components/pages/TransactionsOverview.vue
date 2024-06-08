@@ -20,8 +20,8 @@
 </template>
 
 <script setup>
-import TransactionCards from "../TransactionCards.vue";
-import TransactionList from "../TransactionList.vue";
+import TransactionCards from "../containers/TransactionCards.vue";
+import TransactionList from "../containers/TransactionList.vue";
 </script>
 
 <style scoped>

@@ -5,8 +5,6 @@ import PendingSignUps from "../containers/PendingSignUps.vue";
 </script>
 
 <template>
-    <div class="employeeNavBar"><EmployeeNavigation /></div>
-    <div class="employeeContent">
       <div class="grid">
         <TotalAccounts/>
         <PendingSignUps/>
@@ -19,5 +17,4 @@ import PendingSignUps from "../containers/PendingSignUps.vue";
           <!--   <NewAccountChart />   -->
         </div>
       </div>
-    </div>
 </template>

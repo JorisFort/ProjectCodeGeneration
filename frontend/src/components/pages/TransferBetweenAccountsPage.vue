@@ -8,8 +8,8 @@
 </template>
 
 <script setup>
-//import Sidebar from "../Sidebar.vue";
-import TransferBetweenAccountsForm from "../TransferBetweenAccountsForm.vue";
+//import Sidebar from "../CustomerNavigation.vue";
+import TransferBetweenAccountsForm from "../containers/TransferBetweenAccountsForm.vue";
 </script>
 
 <style scoped>

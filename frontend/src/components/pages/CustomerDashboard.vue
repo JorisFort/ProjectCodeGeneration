@@ -19,10 +19,10 @@
 </template>
 
 <script setup>
-//import Sidebar from "../Sidebar.vue";
-import AccountBalance from "../AccountBalance.vue";
-import AccountSummary from "../AccountSummary.vue";
-import Statistics from "../Statistics.vue";
+//import Sidebar from "../CustomerNavigation.vue";
+import AccountBalance from "../common/AccountBalance.vue";
+import AccountSummary from "../common/AccountSummary.vue";
+import Statistics from "../containers/Statistics.vue";
 </script>
 
 <style scoped>

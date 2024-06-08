@@ -3,24 +3,19 @@
     <div class="sidebar-content">
       <h2>Bank</h2>
       <nav>
-        <router-link to="/dashboard/overview" class="nav-link"
-          >Overview</router-link
-        >
-        <router-link to="/dashboard/accounts" class="nav-link"
-          >Accounts</router-link
-        >
+        <router-link to="/customerDashboard" class="nav-link">
+          Overview</router-link>
+        <router-link to="/customerAccounts" class="nav-link">
+          Accounts</router-link>
         <!-- <router-link to="/dashboard/transactions" class="nav-link"
           >Transactions</router-link
         > -->
-        <router-link to="/dashboard/account-details" class="nav-link"
-          >Profile</router-link
-        >
-        <router-link to="/transfer-funds" class="nav-link"
-          >Transfer Funds</router-link
-        >
-        <router-link to="/transfer-between-accounts" class="nav-link"
-          >Transfer Between Accounts</router-link
-        >
+        <router-link to="/customerProfile" class="nav-link">
+          Profile</router-link>
+        <router-link to="/transfer-funds" class="nav-link">
+          Transfer Funds</router-link>
+        <router-link to="/transfer-between-accounts" class="nav-link">
+          Transfer Between Accounts</router-link>
       </nav>
       <div class="logout">
         <router-link to="/logout" class="nav-link">Logout</router-link>

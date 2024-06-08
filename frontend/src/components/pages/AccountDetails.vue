@@ -14,10 +14,10 @@
 </template>
 
 <script setup>
-//import Sidebar from "../Sidebar.vue";
-import UserProfile from "../UserProfile.vue";
-import AccountBalanceUser from "../AccountBalanceUser.vue";
-import RecentTransactions from "../RecentTransactions.vue";
+//import Sidebar from "../CustomerNavigation.vue";
+import UserProfile from "../containers/UserProfile.vue";
+import AccountBalanceUser from "../common/AccountBalanceUser.vue";
+import RecentTransactions from "../containers/RecentTransactions.vue";
 </script>
 
 <style scoped>

@@ -10,8 +10,8 @@
 </template>
 
 <script setup>
-//import Sidebar from "../Sidebar.vue";
-import TransferFundsForm from "../TransferFundsForm.vue";
+//import Sidebar from "../CustomerNavigation.vue";
+import TransferFundsForm from "../containers/TransferFundsForm.vue";
 </script>
 
 <style scoped>
