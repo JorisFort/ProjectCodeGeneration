@@ -1,24 +1,24 @@
-<script setup>
-import { RouterView, RouterLink } from "vue-router";
-</script>
-
 <template>
-  <main class="container">
-    <nav>
-      <ul>
-        <li><strong>Bill's Bank and Used Car Sales</strong></li>
-      </ul>
-      <ul>
-        <li>
-          <RouterLink to="/">Home</RouterLink>
-        </li>
-        <li>
-          <RouterLink to="/api-test">API Test</RouterLink>
-        </li>
-      </ul>
-    </nav>
-    <RouterView></RouterView>
-  </main>
+  <div id="app">
+    <Sidebar />
+    <div class="content">
+      <router-view></router-view>
+    </div>
+  </div>
 </template>
 
-<style scoped></style>
+<script setup>
+import Sidebar from "./components/Sidebar.vue";
+</script>
+
+<style scoped>
+#app {
+  display: flex; /* Flexbox to align sidebar and content */
+  height: 100vh; /* Full viewport height */
+}
+
+.content {
+  flex: 1; /* Takes up the remaining space */
+  overflow-y: auto; /* Adds scrolling to the main content only */
+}
+</style>
