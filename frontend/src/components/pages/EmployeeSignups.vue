@@ -1,5 +1,6 @@
 <script setup>
 import EmployeeNavigation from "../common/EmployeeNavigation.vue";
+import SignupsOverview from "../containers/SignupsOverview.vue";
 </script>
 
 <template>
@@ -7,5 +8,6 @@ import EmployeeNavigation from "../common/EmployeeNavigation.vue";
     <EmployeeNavigation />
   </div>
   <div class="employeeContent">
+    <SignupsOverview/>
   </div>
 </template>
