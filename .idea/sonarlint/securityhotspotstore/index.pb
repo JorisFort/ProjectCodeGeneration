@@ -17,8 +17,6 @@ l
 <frontend/src/components/common/EmployeeTransactionsTable.vue,6\6\66bac4698d9043167b93d0edb74ed8cc0f7d877d
 z
 Jbackend/src/main/java/com/group4/projectcodegeneration/entity/Account.java,9\3\93fbb9f30680378749e8818feeab8b631df53cec
-_
-/frontend/src/components/common/AccountsItem.vue,b\3\b3e96f1a375cedc3fcdaa4a47f99b54452b60ccf
 g
 7frontend/src/components/pages/EmployeeCreateAccount.vue,4\6\4609677e431b5a634dde73f63221dfba229c26d9
 e
@@ -27,14 +25,10 @@ r
 Bfrontend/src/components/containers/EmployeeTransactionOverview.vue,8\0\8005272e798f70a6fe45165f0ce0c41ec7bdb7ba
 F
 frontend/src/Router.js,5\2\5281e9319cb35ead4f47a139551565d3f684f144
-g
-7frontend/src/components/containers/AccountsOverview.vue,3\e\3e607081ee8ec9084fc5a9f5cf9ddeb0ce87bdcb
 c
 3frontend/src/components/pages/EmployeeCustomers.vue,1\a\1aad612060fc6e9c8bb521168e4df6ddf49c8328
 d
 4frontend/src/components/containers/TotalAccounts.vue,7\0\70128c8b61b19ed6b49c8e91788e2356c9873121
-`
-0frontend/src/components/common/AccountsTable.vue,f\c\fcd21c1efc0c086fa0e34e6d216df96d2d401a35
 e
 5frontend/src/components/pages/EmployeeEditAccount.vue,0\8\08725f602046039e26ced294a276acfb7cb6a7de
 B
