@@ -24,7 +24,7 @@ e
 r
 Bfrontend/src/components/containers/EmployeeTransactionOverview.vue,8\0\8005272e798f70a6fe45165f0ce0c41ec7bdb7ba
 F
-frontend/src/Router.js,5\2\5281e9319cb35ead4f47a139551565d3f684f144
+frontend/src/Router.js,5/2/5281e9319cb35ead4f47a139551565d3f684f144
 c
 3frontend/src/components/pages/EmployeeCustomers.vue,1\a\1aad612060fc6e9c8bb521168e4df6ddf49c8328
 d
@@ -48,7 +48,7 @@ Vbackend/src/main/java/com/group4/projectcodegeneration/service/TransactionServi
 h
 8frontend/src/components/containers/TransactionsChart.vue,8\1\811aaa268de8522abee29ca76a56eaab52ad24f7
 F
-frontend/src/style.css,f\d\fd9890c0465ee74c568d2d3d98e99e72650d1c8f
+frontend/src/style.css,f/d/fd9890c0465ee74c568d2d3d98e99e72650d1c8f
 Y
 )frontend/src/components/common/helpers.js,9\c\9c3517e8ef8c45f9002fbd30e769cad048d78404
 _
@@ -62,7 +62,7 @@ Kbackend/src/main/java/com/group4/projectcodegeneration/entity/Employee.java,f\
 a
 1frontend/src/components/pages/EmployeeSignups.vue,1\9\19856bf579d381da58a54dce5d27dd8b44a8cd4e
 h
-8frontend/src/components/containers/CustomersOverview.vue,8\2\828460cbd67d79b515e256d49e414227d3a90927
+8frontend/src/components/containers/CustomersOverview.vue,8/2/828460cbd67d79b515e256d49e414227d3a90927
 w
 Gbackend/src/main/java/com/group4/projectcodegeneration/entity/User.java,8\2\82687043476088ec9a186853fc5776c125544d92
 u
@@ -74,7 +74,7 @@ f
 p
 @frontend/src/components/containers/EmployeeChangeAccountForm.vue,2\d\2de168675b061e2323a98570f78a078120256072
 D
-frontend/src/App.vue,b\3\b395f139c6c3b350eecc10789c2fb0946ccb4abb
+frontend/src/App.vue,b/3/b395f139c6c3b350eecc10789c2fb0946ccb4abb
 n
 >frontend/src/components/pages/EmployeeCustomerTransactions.vue,3\e\3e4a9f6bf92682697a1c85bda968cdcafaa82af7
 {
@@ -89,3 +89,15 @@ k
 ;frontend/src/components/containers/EmployeeTransferForm.vue,9\f\9ffcf2699603584fc373d11fb166bf855384a3b3
 w
 Gfrontend/src/components/containers/EmployeeCustomerChangeDetailForm.vue,3\8\3829e1a31e1090f541ea405703a0a6cfc7e3bcad
+D
+frontend/src/main.js,d/1/d1299ed3361f95740f5851dbc9577d6b7158ec49
+[
++frontend/src/components/pages/LoginPage.vue,b/b/bb9792beed1ca03433e5f9db8537b6ed1d653ea5
+`
+0frontend/src/components/containers/LoginForm.vue,d/c/dc6ae7948fe2a8f789edf4af5ccacebfffb17dd4
+c
+3frontend/src/components/pages/CustomerDashboard.vue,7/4/74f3dc37179cd7cb0e79078c80396671585d5e77
+g
+7frontend/src/components/containers/CustomerAccounts.vue,4/a/4a98bb2032fcff65b608565310af29116762db6b
+Y
+)frontend/src/components/pages/ATMpage.vue,0/2/02c2fbbb200365b4da5ea4340315dd2fb51af1f8
