@@ -1,6 +1,6 @@
 package com.group4.projectcodegeneration.controller;
 
-import com.group4.projectcodegeneration.model.dto.LoginRequestDto;
+import com.group4.projectcodegeneration.model.dto.LoginRequestDTO;
 import com.group4.projectcodegeneration.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +22,7 @@ public class LoginController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> login(@RequestBody LoginRequestDto loginRequestDTO) {
+    public ResponseEntity<Object> login(@RequestBody LoginRequestDTO loginRequestDTO) {
         try {
             return ResponseEntity.ok(userService.login(loginRequestDTO));
         } catch (AuthenticationException e) {

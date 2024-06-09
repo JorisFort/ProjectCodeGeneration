@@ -2,6 +2,7 @@ package com.group4.projectcodegeneration.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -22,6 +23,7 @@ public class Transaction {
     private Account toAccount;
 
     private Double amount;
+    @CreationTimestamp
     private LocalDateTime timestamp;
 
     @ManyToOne

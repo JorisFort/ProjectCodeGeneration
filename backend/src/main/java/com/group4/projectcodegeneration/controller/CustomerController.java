@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -31,8 +32,8 @@ public class CustomerController {
     }
 
     @GetMapping("/unapproved")
-    public ResponseEntity<Iterator<Customer>> getAllUnapprovedCustomers() {
-        Iterator<Customer> customers = customerService.getAllUnapprovedCustomers();
+    public ResponseEntity<List<Customer>> getAllUnapprovedCustomers() {
+        List<Customer> customers = customerService.getAllUnapprovedCustomers();
         return ResponseEntity.ok(customers);
     }
 
