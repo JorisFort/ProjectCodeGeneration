@@ -1,5 +1,4 @@
 <script setup>
-import EmployeeNavigation from "../common/EmployeeNavigation.vue";
 import TotalAccounts from "../containers/TotalAccounts.vue";
 import PendingSignUps from "../containers/PendingSignUps.vue";
 </script>
