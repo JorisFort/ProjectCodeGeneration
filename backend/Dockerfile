@@ -1,18 +1,17 @@
-# API hosting on render.com
+FROM gradle:7.6.0-jdk17 AS build
 
-FROM ubuntu:latest AS build
-RUN apt-get update && apt-get install -y openjdk-17-jdk wget unzip && rm -rf /var/lib/apt/lists/*
+WORKDIR /app
 
-# Install Gradle
-RUN wget https://services.gradle.org/distributions/gradle-8.5-bin.zip -P /tmp \
-    && unzip -d /opt/gradle /tmp/gradle-8.5-bin.zip \
-    && rm /tmp/gradle-8.5-bin.zip
-ENV PATH=/opt/gradle/gradle-8.5/bin:$PATH
+COPY --chown=gradle:gradle . .
 
-COPY . .
+RUN gradle clean build -x test --no-daemon
 
-RUN gradle wrapper
-RUN ./gradlew clean build -x test
+FROM openjdk:17-jdk-slim
+
+WORKDIR /app
+
+COPY --from=build /app/build/libs/*.jar app.jar
 
 EXPOSE 8080
-ENTRYPOINT ["./gradlew", "bootRun"]
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
