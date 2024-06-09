@@ -28,10 +28,9 @@ public class WebSecurityConfiguration {
 
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-        http.authorizeHttpRequests(requests -> requests.requestMatchers("/login").permitAll());
-        http.authorizeHttpRequests(requests -> requests.requestMatchers("/register").permitAll());
-        http.authorizeHttpRequests(requests -> requests.requestMatchers("/accounts").authenticated());
-        http.authorizeHttpRequests(requests -> requests.requestMatchers("/h2-console").permitAll());
+        http.authorizeHttpRequests(requests -> requests
+                .requestMatchers("/login", "/register").permitAll()
+                .anyRequest().authenticated());
 
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 

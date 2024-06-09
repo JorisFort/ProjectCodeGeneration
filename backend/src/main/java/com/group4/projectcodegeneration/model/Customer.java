@@ -21,5 +21,10 @@ public class Customer {
     private String phoneNumber;
     private Boolean accountApproved;
     private Double dailyTransferLimit;
+    private Double dailyTransferAmount;
     private Double absoluteTransferLimit;
+
+    public void addDailyTransferAmount(double amount) {
+        this.dailyTransferAmount += amount;
+    }
 }

@@ -1,13 +1,13 @@
 package com.group4.projectcodegeneration.service;
 
 import com.group4.projectcodegeneration.model.*;
-import com.group4.projectcodegeneration.model.dto.LoginResponseDto;
-import com.group4.projectcodegeneration.model.dto.RegisterRequestDto;
+import com.group4.projectcodegeneration.model.dto.LoginResponseDTO;
+import com.group4.projectcodegeneration.model.dto.RegisterRequestDTO;
 import com.group4.projectcodegeneration.repository.CustomerRepository;
 import com.group4.projectcodegeneration.security.JwtProvider;
 import org.springframework.stereotype.Service;
 
-import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -29,15 +29,19 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
 
+    public void updateCustomer(Customer customer) {
+        customerRepository.save(customer);
+    }
+
     public Optional<Customer> getCustomerById(Long customerId) {
         return customerRepository.findById(customerId);
     }
 
-    public Iterator<Customer> getAllUnapprovedCustomers() {
+    public List<Customer> getAllUnapprovedCustomers() {
         return customerRepository.findByAccountApprovedFalse();
     }
 
-    public LoginResponseDto register(RegisterRequestDto registerRequestDto) throws IllegalArgumentException {
+    public LoginResponseDTO register(RegisterRequestDTO registerRequestDto) throws IllegalArgumentException {
         User user = new User();
         user.setEmail(registerRequestDto.email());
         user.setPassword(registerRequestDto.password());
@@ -52,7 +56,7 @@ public class CustomerService {
         customer.setUser(user);
         createCustomer(customer);
 
-        return new LoginResponseDto(user.getEmail(), jwtProvider.createToken(user));
+        return new LoginResponseDTO(user.getEmail(), jwtProvider.createToken(user));
     }
 
     public Customer approveCustomer(Long customerId) {

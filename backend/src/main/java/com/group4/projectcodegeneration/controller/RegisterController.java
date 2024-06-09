@@ -1,6 +1,6 @@
 package com.group4.projectcodegeneration.controller;
 
-import com.group4.projectcodegeneration.model.dto.RegisterRequestDto;
+import com.group4.projectcodegeneration.model.dto.RegisterRequestDTO;
 import com.group4.projectcodegeneration.service.CustomerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ public class RegisterController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> register(@RequestBody RegisterRequestDto registerRequestDTO) {
+    public ResponseEntity<Object> register(@RequestBody RegisterRequestDTO registerRequestDTO) {
         try {
             return ResponseEntity.ok(customerService.register(registerRequestDTO));
         } catch (IllegalArgumentException e) {

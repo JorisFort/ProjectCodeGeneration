@@ -21,4 +21,35 @@ public class Account {
     public Account() {
         this.balance = 0.0;
     }
+
+    private void checkTransferLimits(double amount) throws IllegalArgumentException {
+        if (amount > customer.getDailyTransferLimit()) {
+            throw new IllegalArgumentException("Transaction amount of " + amount + " exceeds daily transfer limit of " + customer.getDailyTransferLimit());
+        }
+        if (amount > customer.getAbsoluteTransferLimit()) {
+            throw new IllegalArgumentException("Transaction amount of " + amount + " exceeds absolute transfer limit of " + customer.getAbsoluteTransferLimit());
+        }
+    }
+
+    public void deposit(double amount) throws IllegalArgumentException {
+        checkTransferLimits(amount);
+        this.balance += amount;
+        customer.addDailyTransferAmount(amount);
+    }
+
+    public void withdraw(double amount) throws IllegalArgumentException {
+        checkTransferLimits(amount);
+        if (this.balance < amount) {
+            throw new IllegalArgumentException("Insufficient balance");
+        }
+        this.balance -= amount;
+        customer.addDailyTransferAmount(amount);
+    }
+
+    public void transfer(Account toAccount, double amount) throws IllegalArgumentException {
+        checkTransferLimits(amount);
+        withdraw(amount);
+        toAccount.deposit(amount);
+        customer.addDailyTransferAmount(amount);
+    }
 }

@@ -2,8 +2,10 @@ package com.group4.projectcodegeneration.controller;
 
 import com.group4.projectcodegeneration.model.Transaction;
 import com.group4.projectcodegeneration.model.User;
+import com.group4.projectcodegeneration.model.dto.TransactionDTO;
 import com.group4.projectcodegeneration.service.TransactionService;
 import com.group4.projectcodegeneration.service.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,9 +24,13 @@ public class TransactionController {
     }
 
     @PostMapping
-    public ResponseEntity<Transaction> createTransaction(@RequestBody Transaction transaction) {
-        Transaction createdTransaction = transactionService.createTransaction(transaction);
-        return ResponseEntity.status(201).body(createdTransaction);
+    public ResponseEntity<Object> createTransaction(@RequestBody TransactionDTO transaction) {
+        try {
+            Transaction createdTransaction = transactionService.createTransaction(transaction);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdTransaction);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @GetMapping

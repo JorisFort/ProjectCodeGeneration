@@ -1,14 +1,18 @@
 package com.group4.projectcodegeneration.service;
 
 import com.group4.projectcodegeneration.model.User;
-import com.group4.projectcodegeneration.model.dto.LoginRequestDto;
-import com.group4.projectcodegeneration.model.dto.LoginResponseDto;
+import com.group4.projectcodegeneration.model.dto.LoginRequestDTO;
+import com.group4.projectcodegeneration.model.dto.LoginResponseDTO;
 import com.group4.projectcodegeneration.repository.UserRepository;
 import com.group4.projectcodegeneration.security.JwtProvider;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.naming.AuthenticationException;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,29 +29,42 @@ public class UserService {
     }
 
     public User createUser(User user) throws IllegalArgumentException {
-        User existingUser = userRepository.findByEmail(user.getEmail());
-        if (existingUser != null) {
+        Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
+        if (existingUser.isPresent()) {
             throw new IllegalArgumentException("Email is already in use");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
-    public Iterable<User> getAllUsers() {
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
     public Optional<User> getUserById(Long userId) {
         return userRepository.findById(userId);
     }
+    public Optional<User> getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
 
-    public LoginResponseDto login(LoginRequestDto loginRequest) throws AuthenticationException {
-        User user = userRepository.findByEmail(loginRequest.email());
-        if (user != null && passwordEncoder.matches(loginRequest.password(), user.getPassword())) {
-            return new LoginResponseDto(user.getEmail(), jwtProvider.createToken(user));
+    public LoginResponseDTO login(LoginRequestDTO loginRequest) throws AuthenticationException {
+        Optional<User> user = userRepository.findByEmail(loginRequest.email());
+        if (user.isPresent() && passwordEncoder.matches(loginRequest.password(), user.get().getPassword())) {
+            return new LoginResponseDTO(user.get().getEmail(), jwtProvider.createToken(user.get()));
         } else {
             throw new AuthenticationException("Invalid credentials");
         }
+    }
+
+    public User getAuthenticatedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String email = userDetails.getUsername();
+
+        Optional<User> optionalUser = getUserByEmail(email);
+        if (optionalUser.isEmpty()) throw new IllegalArgumentException("User not found");
+        return optionalUser.get();
     }
 }
 
