@@ -29,7 +29,7 @@ const atmClick = () => {
 
 <template>
 <!--  Temporary-->
-  <div v-if="!choiceMade">
+<!--  <div v-if="!choiceMade">
     <h1>Choose view:</h1>
     <button @click="customerClick">Customer</button>
     <button @click="employeeClick">Employee</button>
@@ -51,7 +51,8 @@ const atmClick = () => {
   </div>
   <div v-if="atm">
     <router-view></router-view>
-  </div>
+  </div>-->
+  <router-view></router-view>
 </template>
 
 <style scoped>

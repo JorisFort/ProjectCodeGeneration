@@ -18,7 +18,10 @@
 
 <script setup>
 import { reactive } from "vue";
+import { useRouter } from 'vue-router';
 import { login } from "@/services/UserService";
+
+const router = useRouter();
 
 const state = reactive({
   email: "",
@@ -31,7 +34,13 @@ const handleLogin = async () => {
   try {
     const response = await login(state.email, state.password);
     localStorage.setItem("jwtToken", response.token);
-    // TODO: Redirect to the dashboard
+    localStorage.setItem("user", response.user);
+    if (response.user.role === 'EMPLOYEE') {
+      await router.push('/employeeDashboard');
+    }
+    else if (response.user.role === 'CUSTOMER') {
+      await router.push('/customerDashboard');
+    }
   } catch (err) {
     state.error = err.message;
   }

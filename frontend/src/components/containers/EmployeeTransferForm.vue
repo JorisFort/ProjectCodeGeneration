@@ -1,5 +1,6 @@
 <script setup>
-import {ref} from "vue";
+import { ref } from "vue";
+import { transfer } from "@/services/TransactionService"
 
 const senderName = ref('');
 const senderAccountNumber = ref('');
@@ -70,8 +71,20 @@ const validateForm = () => {
   return isValid;
 }
 
-const submitForm = () => {
-
+const submitForm = async () => {
+  const newTransfer = {
+    senderName: this.senderName,
+    senderAccountNumber: this.senderAccountNumber,
+    recipientName: this.recipientName,
+    recipientAccountNumber: this.recipientAccountNumber,
+    amount: this.amount,
+    description: this.description
+  }
+  try {
+    const response = await transfer(newTransfer);
+  } catch (err) {
+    console.error(err)
+  }
 }
 </script>
 

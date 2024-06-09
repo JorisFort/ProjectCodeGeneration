@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import EmployeeTransactionsTable from "../common/EmployeeTransactionsTable.vue";
+import { getAllTransactions } from "@/services/TransactionService";
 
 let transactions = [
   {
