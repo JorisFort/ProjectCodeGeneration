@@ -29,8 +29,8 @@ const state = reactive({
 const handleLogin = async () => {
   state.error = ""; // Reset error message
   try {
-    const data = await login(state.email, state.password);
-    localStorage.setItem("jwtToken", data.token);
+    const response = await login(state.email, state.password);
+    localStorage.setItem("jwtToken", response.token);
     // TODO: Redirect to the dashboard
   } catch (err) {
     state.error = err.message;

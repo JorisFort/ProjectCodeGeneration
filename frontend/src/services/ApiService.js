@@ -12,15 +12,19 @@ export const apiCall = async (url, method, body = null) => {
         }
 
         const response = await fetch(url, options);
-
-        const contentType = response.headers.get("Content-Type");
-
         if (response.ok) {
             return await response.json();
         } else {
-            throw new Error(await response.text());
+            const error = new Error(await response.text());
+            error.isCustomError = true;
+            throw error;
         }
     } catch (error) {
-        throw new Error(error.message || "An error occurred");
+        if (!error.isCustomError) {
+            console.error(error);
+            error.message = "Something went wrong. Please try again later.";
+        }
+
+        throw error;
     }
 };
