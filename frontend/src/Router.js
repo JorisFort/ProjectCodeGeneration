@@ -48,29 +48,34 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
-    const isAuthenticated = !!localStorage.getItem('jwtToken');
+const isAuthenticated = () => !!localStorage.getItem('jwtToken');
 
-    // If the route does not require authentication, proceed
-    if (!to.meta.requiresAuth) {
+const getUserRole = () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return user ? user.role : null;
+};
+
+const redirectToDashboard = (role, next) => {
+    if (role === 'EMPLOYEE') {
+        next({path: '/employeeDashboard'});
+    } else if (role === 'CUSTOMER') {
+        next({path: '/customerDashboard'});
+    }
+};
+
+router.beforeEach((to, from, next) => {
+    if (!to.meta.requiresAuth && to.path !== '/') {
         next();
-    } else if (!isAuthenticated && to.path !== '/login') {
+    } else if (!isAuthenticated()) {
         next({ path: '/login' });
-    } else if (isAuthenticated) {
-        const user = JSON.parse(localStorage.getItem('user'));
+    } else {
+        const userRole = getUserRole();
         const toRole = to.meta.role;
-        // If the user is not authorized to access the page, redirect to the appropriate dashboard
-        if (toRole && toRole !== user.role) {
-            if (user.role === 'EMPLOYEE') {
-                next({path: '/employeeDashboard'});
-            } else if (user.role === 'CUSTOMER') {
-                next({path: '/customerDashboard'});
-            }
+        if (toRole && toRole !== userRole) {
+            redirectToDashboard(userRole, next);
         } else {
             next();
         }
-    } else {
-        next();
     }
 });
 
