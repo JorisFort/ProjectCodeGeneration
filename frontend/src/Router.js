@@ -18,34 +18,59 @@ import EmployeeEditAccount from "./components/pages/EmployeeEditAccount.vue";
 import EmployeeCustomerDetail from "./components/pages/EmployeeCustomerDetail.vue";
 import EmployeeCustomerChangeDetail from "./components/pages/EmployeeCustomerChangeDetail.vue";
 import EmployeeCustomerTransactions from "./components/pages/EmployeeCustomerTransactions.vue";
-import ATMpage from "./components/pages/ATMpage.vue";
+import ATMPage from "./components/pages/ATMpage.vue";
 
 const routes = [
-    { path: "/", component: LoginPage },
+    { path: "/login", component: LoginPage },
     { path: "/register", component: RegisterPage },
-    { path: "/transfer-funds", component: TransferFundsPage },
-    { path: "/transfer-between-accounts", component: TransferBetweenAccountsPage,},
-    { path: "/customerDashboard", component: CustomerDashboard },
-    { path: "/dashboard/transactions", component: TransactionsOverview },
-    { path: "/customerProfile", component: AccountDetails },
-    { path: "/customerAccounts", component: AccountsPage },
-    { path: "/employeeDashboard", component: EmployeeDashboard},
-    { path: "/employeeTransactions", component: EmployeeTransaction},
-    { path: "/employeeCustomers", component: EmployeeCustomers},
-    { path: "/employeeTransfer", component: EmployeeTransfer},
-    { path: "/employeeCreateAccount", component: EmployeeCreateAccount},
-    { path: "/employeeSignups", component: EmployeeSignups},
-    { path: "/employeeAccount", component: EmployeeAccount},
-    { path: "/employeeEditAccount", component: EmployeeEditAccount },
-    { path: "/employeeCustomerDetail/:id", name: 'EmployeeCustomerDetail', component: EmployeeCustomerDetail},
-    { path: "/employeeCustomerChangeDetail/:id", name: 'EmployeeCustomerChangeDetail', component: EmployeeCustomerChangeDetail},
-    { path: "/employeeCustomerTransactions/:id", name: 'EmployeeCustomerTransactions', component: EmployeeCustomerTransactions},
-    { path: "/atm", component: ATMpage}
+    { path: "/transfer-funds", component: TransferFundsPage, meta: { requiresAuth: true, role: 'customer' } },
+    { path: "/transfer-between-accounts", component: TransferBetweenAccountsPage, meta: { requiresAuth: true, role: 'customer' } },
+    { path: "/customerDashboard", component: CustomerDashboard, meta: { requiresAuth: true, role: 'customer' } },
+    { path: "/dashboard/transactions", component: TransactionsOverview, meta: { requiresAuth: true, role: 'customer' } },
+    { path: "/customerProfile", component: AccountDetails, meta: { requiresAuth: true, role: 'customer' } },
+    { path: "/customerAccounts", component: AccountsPage, meta: { requiresAuth: true, role: 'customer' } },
+    { path: "/employeeDashboard", component: EmployeeDashboard, meta: { requiresAuth: true, role: 'employee' } },
+    { path: "/employeeTransactions", component: EmployeeTransaction, meta: { requiresAuth: true, role: 'employee' } },
+    { path: "/employeeCustomers", component: EmployeeCustomers, meta: { requiresAuth: true, role: 'employee' } },
+    { path: "/employeeTransfer", component: EmployeeTransfer, meta: { requiresAuth: true, role: 'employee' } },
+    { path: "/employeeCreateAccount", component: EmployeeCreateAccount, meta: { requiresAuth: true, role: 'employee' } },
+    { path: "/employeeSignups", component: EmployeeSignups, meta: { requiresAuth: true, role: 'employee' } },
+    { path: "/employeeAccount", component: EmployeeAccount, meta: { requiresAuth: true, role: 'employee' } },
+    { path: "/employeeEditAccount", component: EmployeeEditAccount, meta: { requiresAuth: true, role: 'employee' } },
+    { path: "/employeeCustomerDetail/:id", name: 'EmployeeCustomerDetail', component: EmployeeCustomerDetail, meta: { requiresAuth: true, role: 'employee' } },
+    { path: "/employeeCustomerChangeDetail/:id", name: 'EmployeeCustomerChangeDetail', component: EmployeeCustomerChangeDetail, meta: { requiresAuth: true, role: 'employee' } },
+    { path: "/employeeCustomerTransactions/:id", name: 'EmployeeCustomerTransactions', component: EmployeeCustomerTransactions, meta: { requiresAuth: true, role: 'employee' } },
+    { path: "/atm", component: ATMPage, meta: { requiresAuth: true, role: 'customer' } }
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
 });
+
+router.beforeEach((to, from, next) => {
+    const isAuthenticated = !!localStorage.getItem('jwtToken');
+    const user = localStorage.getItem('user');
+
+    if (to.matched.some(record => record.meta.requiresAuth)){
+        if (!isAuthenticated) {
+            next({ path: '/login' });
+        }
+        else if (to.meta.role && to.meta.role !== user.role) {
+            if (to.meta.role === 'Employee') {
+                next({ path: '/employeeDashboard' });
+            }
+            else if (to.meta.role === 'Customer') {
+                next({ path: '/customerDashboard' });
+            }
+            else {
+                next();
+            }
+        }
+    }
+    else {
+        next();
+    }
+})
 
 export default router;

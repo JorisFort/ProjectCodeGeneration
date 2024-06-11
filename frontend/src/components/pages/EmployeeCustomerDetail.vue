@@ -1,5 +1,4 @@
 <script setup>
-import EmployeeNavigation from "../common/EmployeeNavigation.vue";
 import EmployeeCustomerDetailOverview from "../containers/EmployeeCustomerDetailOverview.vue";
 
 import {useRoute} from "vue-router";
@@ -22,11 +21,6 @@ const deleteAccount = () => {
 </script>
 
 <template>
-
-  <div class="employeeNavBar">
-    <EmployeeNavigation />
-  </div>
-  <div class="employeeContent">
     <div v-if="!confirmDeletion">
       <div>
         <router-link to="/EmployeeCustomers" class="backButton"><button>Back</button></router-link>
@@ -46,6 +40,4 @@ const deleteAccount = () => {
       <button @click="deleteAccount" class="employeeDeletionButton">Yes</button>
       <button @click="noDeletion" class="employeeDeletionButton">No</button>
     </div>
-  </div>
-
 </template>

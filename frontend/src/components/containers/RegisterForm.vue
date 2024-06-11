@@ -33,6 +33,16 @@
         />
       </div>
       <div class="input-group">
+        <label for="phoneNumber">Phone number</label>
+        <input
+          type="text"
+          id="phoneNumber"
+          v-model="phoneNumber"
+          placeholder="Enter your phone number"
+          required
+        />
+      </div>
+      <div class="input-group">
         <label for="password">Password</label>
         <input
           type="password"
@@ -69,22 +79,32 @@
 
 <script setup>
 import { ref } from "vue";
+import { useRouter } from 'vue-router';
+import { register } from "@/services/UserService.js";
 
+const router = useRouter();
 const firstName = ref("");
 const lastName = ref("");
 const email = ref("");
+const phoneNumber = ref("");
 const password = ref("");
 const bsn = ref("");
 const acceptedTerms = ref(false);
 
-const handleRegister = () => {
-  // Registration logic here
-  console.log("First Name:", firstName.value);
-  console.log("Last Name:", lastName.value);
-  console.log("Email:", email.value);
-  console.log("Password:", password.value);
-  console.log("BSN:", bsn.value);
-  console.log("Accepted Terms:", acceptedTerms.value);
+const handleRegister = async () => {
+  try {
+    const response = await register(email, password, firstName, lastName, bsn, phoneNumber);
+    localStorage.setItem("jwtToken", response.token);
+    localStorage.setItem("user", response.user);
+    if (response.user.role === 'EMPLOYEE') {
+      await router.push('/employeeDashboard');
+    }
+    else if (response.user.role === 'CUSTOMER') {
+      await router.push('/customerDashboard');
+    }
+  } catch (err) {
+    console.error(err.message);
+  }
 };
 </script>
 
