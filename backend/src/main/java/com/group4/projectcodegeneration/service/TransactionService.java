@@ -4,15 +4,13 @@ import com.group4.projectcodegeneration.model.Account;
 import com.group4.projectcodegeneration.model.Transaction;
 import com.group4.projectcodegeneration.model.User;
 import com.group4.projectcodegeneration.model.UserRole;
-import com.group4.projectcodegeneration.model.dto.TransactionDTO;
+import com.group4.projectcodegeneration.model.dto.TransactionDto;
 import com.group4.projectcodegeneration.repository.TransactionRepository;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TransactionService {
@@ -27,7 +25,7 @@ public class TransactionService {
         this.accountService = accountService;
     }
 
-    public Transaction createTransaction(TransactionDTO transaction) {
+    public Transaction createTransaction(TransactionDto transaction) {
         User user = userService.getAuthenticatedUser();
 
         Transaction newTransaction = new Transaction();
@@ -45,7 +43,7 @@ public class TransactionService {
         return transactionRepository.save(newTransaction);
     }
 
-    private void handleDeposit(TransactionDTO transaction, Transaction newTransaction){
+    private void handleDeposit(TransactionDto transaction, Transaction newTransaction){
         Account account = getAccountByIban(transaction.toIban());
         account.deposit(transaction.amount());
         newTransaction.setToAccount(account);
@@ -54,7 +52,7 @@ public class TransactionService {
         accountService.updateAccount(account);
     }
 
-    private void handleWithdrawal(TransactionDTO transaction, Transaction newTransaction){
+    private void handleWithdrawal(TransactionDto transaction, Transaction newTransaction){
         Account account = getAccountByIban(transaction.fromIban());
         account.withdraw(transaction.amount());
         newTransaction.setFromAccount(account);
@@ -63,7 +61,7 @@ public class TransactionService {
         accountService.updateAccount(account);
     }
 
-    private void handleTransfer(TransactionDTO transaction, Transaction newTransaction) {
+    private void handleTransfer(TransactionDto transaction, Transaction newTransaction) {
         Account fromAccount = getAccountByIban(transaction.fromIban());
         Account toAccount = getAccountByIban(transaction.toIban());
 

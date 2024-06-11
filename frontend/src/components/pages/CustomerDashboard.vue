@@ -22,7 +22,7 @@
 //import Sidebar from "../CustomerNavigation.vue";
 import AccountBalance from "../common/AccountBalance.vue";
 import AccountSummary from "../common/AccountSummary.vue";
-import Statistics from "../containers/Statistics.vue";
+import Statistics from "../containers/dashboard/Statistics.vue";
 </script>
 
 <style scoped>

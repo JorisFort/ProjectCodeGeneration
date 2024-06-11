@@ -1,5 +1,5 @@
 <script setup>
-import EmployeeCustomerDetailOverview from "../containers/EmployeeCustomerDetailOverview.vue";
+import EmployeeCustomerDetailOverview from "../containers/dashboard/EmployeeCustomerDetailOverview.vue";
 
 import {useRoute} from "vue-router";
 import {computed, ref} from "vue";

@@ -11,7 +11,7 @@
 
 <script setup>
 //import Sidebar from "../CustomerNavigation.vue";
-import TransferFundsForm from "../containers/TransferFundsForm.vue";
+import TransferFundsForm from "../containers/dashboard/transaction/TransferFundsForm.vue";
 </script>
 
 <style scoped>

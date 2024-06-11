@@ -1,8 +1,9 @@
 package com.group4.projectcodegeneration.service;
 
 import com.group4.projectcodegeneration.model.User;
-import com.group4.projectcodegeneration.model.dto.LoginRequestDTO;
-import com.group4.projectcodegeneration.model.dto.LoginResponseDTO;
+import com.group4.projectcodegeneration.model.dto.LoginRequestDto;
+import com.group4.projectcodegeneration.model.dto.LoginResponseDto;
+import com.group4.projectcodegeneration.model.dto.UserDto;
 import com.group4.projectcodegeneration.repository.UserRepository;
 import com.group4.projectcodegeneration.security.JwtProvider;
 import org.springframework.security.core.Authentication;
@@ -53,10 +54,10 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public LoginResponseDTO login(LoginRequestDTO loginRequest) throws AuthenticationException {
+    public LoginResponseDto login(LoginRequestDto loginRequest) throws AuthenticationException {
         Optional<User> user = userRepository.findByEmail(loginRequest.email());
         if (user.isPresent() && passwordEncoder.matches(loginRequest.password(), user.get().getPassword())) {
-            return new LoginResponseDTO(user.get().getEmail(), jwtProvider.createToken(user.get()));
+            return new LoginResponseDto(new UserDto(user.get().getId(), user.get().getEmail(), user.get().getRole()), jwtProvider.createToken(user.get()));
         } else {
             throw new AuthenticationException("Invalid credentials");
         }

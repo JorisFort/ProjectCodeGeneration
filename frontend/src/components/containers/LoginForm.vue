@@ -1,5 +1,8 @@
 <template>
   <div class="login-form">
+    <div v-if="state.error" class="error-box">
+      {{ state.error }}
+    </div>
     <h2>Login</h2>
     <form @submit.prevent="handleLogin">
       <div class="input-group">
@@ -11,15 +14,15 @@
         <input type="password" id="password" v-model="state.password" required />
       </div>
       <button type="submit">Login</button>
-      <p v-if="state.error" class="error">{{ state.error }}</p>
+      <router-link to="/register" class="register-link">Don't have an account? Register</router-link>
     </form>
   </div>
 </template>
 
 <script setup>
-import { reactive } from "vue";
-import { useRouter } from 'vue-router';
-import { login } from "@/services/UserService";
+import {reactive} from "vue";
+import {useRouter} from 'vue-router';
+import {login} from "@/services/UserService.js";
 
 const router = useRouter();
 
@@ -37,8 +40,7 @@ const handleLogin = async () => {
     localStorage.setItem("user", response.user);
     if (response.user.role === 'EMPLOYEE') {
       await router.push('/employeeDashboard');
-    }
-    else if (response.user.role === 'CUSTOMER') {
+    } else if (response.user.role === 'CUSTOMER') {
       await router.push('/customerDashboard');
     }
   } catch (err) {
@@ -82,8 +84,16 @@ button {
   cursor: pointer;
 }
 
-.error {
-  color: red;
-  margin-top: 1rem;
+.register-link {
+  font-size: 0.8rem;
+}
+
+.error-box {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
 }
 </style>

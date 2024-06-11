@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue';
-import EmployeeTransactionsTable from "../common/EmployeeTransactionsTable.vue";
+import EmployeeTransactionsTable from "../../common/EmployeeTransactionsTable.vue";
 
 const props = defineProps( {
   id: String,

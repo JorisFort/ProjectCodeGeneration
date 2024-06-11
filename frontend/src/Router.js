@@ -51,7 +51,10 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     const isAuthenticated = !!localStorage.getItem('jwtToken');
 
-    if (!isAuthenticated && to.path !== '/login') {
+    // If the route does not require authentication, proceed
+    if (!to.meta.requiresAuth) {
+        next();
+    } else if (!isAuthenticated && to.path !== '/login') {
         next({ path: '/login' });
     } else if (isAuthenticated) {
         const user = JSON.parse(localStorage.getItem('user'));

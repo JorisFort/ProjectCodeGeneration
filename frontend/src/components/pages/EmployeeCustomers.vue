@@ -1,5 +1,5 @@
 <script setup>
-import CustomersOverview from "../containers/CustomersOverview.vue";
+import CustomersOverview from "../containers/dashboard/CustomersOverview.vue";
 </script>
 
 <template>

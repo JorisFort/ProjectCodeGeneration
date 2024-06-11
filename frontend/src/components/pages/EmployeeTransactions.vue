@@ -1,5 +1,5 @@
 <script setup>
-import EmployeeTransactionOverview from "../containers/EmployeeTransactionOverview.vue"
+import EmployeeTransactionOverview from "../containers/dashboard/EmployeeTransactionOverview.vue"
 </script>
 
 <template>

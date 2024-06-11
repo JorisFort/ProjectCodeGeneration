@@ -1,8 +1,9 @@
 package com.group4.projectcodegeneration.service;
 
 import com.group4.projectcodegeneration.model.*;
-import com.group4.projectcodegeneration.model.dto.LoginResponseDTO;
-import com.group4.projectcodegeneration.model.dto.RegisterRequestDTO;
+import com.group4.projectcodegeneration.model.dto.LoginResponseDto;
+import com.group4.projectcodegeneration.model.dto.RegisterRequestDto;
+import com.group4.projectcodegeneration.model.dto.UserDto;
 import com.group4.projectcodegeneration.repository.CustomerRepository;
 import com.group4.projectcodegeneration.security.JwtProvider;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class CustomerService {
         return customerRepository.findByAccountApprovedFalse();
     }
 
-    public LoginResponseDTO register(RegisterRequestDTO registerRequestDto) {
+    public LoginResponseDto register(RegisterRequestDto registerRequestDto) {
         User user = new User();
         user.setEmail(registerRequestDto.email());
         user.setPassword(registerRequestDto.password());
@@ -52,7 +53,7 @@ public class CustomerService {
         customer.setUser(user);
         customerRepository.save(customer);
 
-        return new LoginResponseDTO(user.getEmail(), jwtProvider.createToken(user));
+        return new LoginResponseDto(new UserDto(user.getId(), user.getEmail(), user.getRole()), jwtProvider.createToken(user));
     }
 
     public Customer approveCustomer(Long userId) {

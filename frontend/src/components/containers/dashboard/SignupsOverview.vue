@@ -1,8 +1,8 @@
 <script setup>
 import { ref, computed } from 'vue';
-import CustomersTable from "../common/CustomersTable.vue";
+import SignupsTable from "../../common/SignupsTable.vue";
 
-let customers = [
+let signups = [
   {
     id: "a1b2c3d4",
     firstName: "Alice",
@@ -79,27 +79,19 @@ let customers = [
 
 const searchQuery = ref('');
 
-const filteredCustomers = computed(() => {
-  return customers.filter(customer => {
-    return Object.values(customer).some(value =>
+const filteredSignups = computed(() => {
+  return signups.filter(signup => {
+    return Object.values(signup).some(value =>
         value.toString().toLowerCase().includes(searchQuery.value.toLowerCase())
     );
   });
 });
 
-const sortedCustomers = computed(() => {
-  return filteredCustomers.value.sort((a, b) => a.lastName.localeCompare(b.lastName));
-});
-
-const resultsAvailable = computed(() => {
-  return sortedCustomers.value.length > 0;
-});
-
 </script>
 
 <template>
-  <input v-model="searchQuery" type="text" placeholder="Search customers"/>
 
-  <CustomersTable v-if="resultsAvailable" :customers="filteredCustomers" />
-  <div v-else>No results found</div>
+  <input v-model="searchQuery" type="text" placeholder="Search users"/>
+  <SignupsTable :signups="filteredSignups"/>
+
 </template>

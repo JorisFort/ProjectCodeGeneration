@@ -1,5 +1,5 @@
 <script setup>
-import EmployeeTransferForm from "../containers/EmployeeTransferForm.vue";
+import EmployeeTransferForm from "../containers/dashboard/EmployeeTransferForm.vue";
 </script>
 
 <template>

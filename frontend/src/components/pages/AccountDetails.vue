@@ -15,9 +15,9 @@
 
 <script setup>
 //import Sidebar from "../CustomerNavigation.vue";
-import UserProfile from "../containers/UserProfile.vue";
+import UserProfile from "../containers/dashboard/UserProfile.vue";
 import AccountBalanceUser from "../common/AccountBalanceUser.vue";
-import RecentTransactions from "../containers/RecentTransactions.vue";
+import RecentTransactions from "../containers/dashboard/RecentTransactions.vue";
 </script>
 
 <style scoped>

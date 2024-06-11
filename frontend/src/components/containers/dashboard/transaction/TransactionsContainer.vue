@@ -1,6 +1,6 @@
 <script setup>
-import Loading from "../common/Loading.vue";
-import TransactionsTable from "../common/TransactionsTable.vue";
+import Loading from "../../../common/Loading.vue";
+import TransactionsTable from "../../../common/TransactionsTable.vue";
 import { useQueryClient, useQuery, useMutation } from "@tanstack/vue-query";
 
 /**

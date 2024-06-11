@@ -1,5 +1,5 @@
 <script setup>
-import EmployeeCustomerTransactions from "../containers/EmployeeCustomerTransactionsOverview.vue";
+import EmployeeCustomerTransactions from "../containers/dashboard/EmployeeCustomerTransactionsOverview.vue";
 import {useRoute} from "vue-router";
 const id = useRoute().params.id;
 </script>

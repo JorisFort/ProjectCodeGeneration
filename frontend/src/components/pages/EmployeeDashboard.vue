@@ -1,6 +1,6 @@
 <script setup>
-import TotalAccounts from "../containers/TotalAccounts.vue";
-import PendingSignUps from "../containers/PendingSignUps.vue";
+import TotalAccounts from "../containers/dashboard/TotalAccounts.vue";
+import PendingSignUps from "../containers/dashboard/PendingSignUps.vue";
 </script>
 
 <template>

@@ -1,12 +1,9 @@
 package com.group4.projectcodegeneration.controller;
 
-import com.group4.projectcodegeneration.model.dto.LoginRequestDTO;
-import com.group4.projectcodegeneration.model.dto.LoginResponseDTO;
-import com.group4.projectcodegeneration.model.dto.RegisterRequestDTO;
+import com.group4.projectcodegeneration.model.dto.LoginResponseDto;
+import com.group4.projectcodegeneration.model.dto.RegisterRequestDto;
 import com.group4.projectcodegeneration.service.CustomerService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +20,7 @@ public class RegisterController {
     }
 
     @PostMapping
-    public ResponseEntity<LoginResponseDTO> register(@RequestBody RegisterRequestDTO registerRequestDTO) {
+    public ResponseEntity<LoginResponseDto> register(@RequestBody RegisterRequestDto registerRequestDTO) {
         return ResponseEntity.ok(customerService.register(registerRequestDTO));
     }
 }
