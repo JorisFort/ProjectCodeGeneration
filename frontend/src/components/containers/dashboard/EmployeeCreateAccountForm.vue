@@ -9,7 +9,7 @@ const password = ref('');
 
 const handleSubmit = () => {
   const isValid = validateForm();
-  if(isValid) {
+  if (isValid) {
     submitForm();
   }
 }
@@ -20,40 +20,35 @@ const validateForm = () => {
   if (!firstName.value) {
     isValid = false;
     document.querySelector('[name="firstName"]').setAttribute('aria-invalid', 'true');
-  }
-  else {
+  } else {
     document.querySelector('[name="firstName"]').setAttribute('aria-invalid', 'false');
   }
 
   if (!lastName.value) {
     isValid = false;
     document.querySelector('[name="lastName"]').setAttribute('aria-invalid', 'true');
-  }
-  else {
+  } else {
     document.querySelector('[name="lastName"]').setAttribute('aria-invalid', 'false');
   }
 
   if (!email.value) {
     isValid = false;
     document.querySelector('[name="email"]').setAttribute('aria-invalid', 'true');
-  }
-  else {
+  } else {
     document.querySelector('[name="email"]').setAttribute('aria-invalid', 'false');
   }
 
   if (!bsn.value) {
     isValid = false;
     document.querySelector('[name="bsn"]').setAttribute('aria-invalid', 'true');
-  }
-  else {
+  } else {
     document.querySelector('[name="bsn"]').setAttribute('aria-invalid', 'false');
   }
 
   if (!password.value) {
     isValid = false;
     document.querySelector('[name="password"]').setAttribute('aria-invalid', 'true');
-  }
-  else {
+  } else {
     document.querySelector('[name="password"]').setAttribute('aria-invalid', 'false');
   }
   return isValid
@@ -67,12 +62,12 @@ const submitForm = () => {
 <template>
   <form @submit.prevent="handleSubmit">
     <fieldset class="grid">
-      <input type="text" name="firstName" placeholder="First name" v-model="firstName" aria-invalid=""/>
-      <input type="text" name="lastName" placeholder="Last name" v-model="lastName" aria-invalid="">
+      <input v-model="firstName" aria-invalid="" name="firstName" placeholder="First name" type="text"/>
+      <input v-model="lastName" aria-invalid="" name="lastName" placeholder="Last name" type="text">
     </fieldset>
-    <input type="email" name="email" placeholder="Email" v-model="email" aria-invalid=""/>
-    <input type="number" name="bsn" placeholder="BSN" v-model="bsn" aria-invalid=""/>
-    <input type="password" name="password" placeholder="Password" v-model="password" aria-invalid=""/>
+    <input v-model="email" aria-invalid="" name="email" placeholder="Email" type="email"/>
+    <input v-model="bsn" aria-invalid="" name="bsn" placeholder="BSN" type="number"/>
+    <input v-model="password" aria-invalid="" name="password" placeholder="Password" type="password"/>
     <button type="submit">Create</button>
   </form>
 </template>

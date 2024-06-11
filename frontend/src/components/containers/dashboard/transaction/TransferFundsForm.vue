@@ -13,52 +13,52 @@
       <div class="input-group">
         <label for="amount">Amount</label>
         <input
-          type="text"
-          id="amount"
-          v-model="amount"
-          placeholder="100,000"
-          required
+            id="amount"
+            v-model="amount"
+            placeholder="100,000"
+            required
+            type="text"
         />
       </div>
       <div class="input-group">
         <label for="card-number">Card Number</label>
         <input
-          type="text"
-          id="card-number"
-          v-model="cardNumber"
-          placeholder="0000 0000 0000 0000"
-          required
+            id="card-number"
+            v-model="cardNumber"
+            placeholder="0000 0000 0000 0000"
+            required
+            type="text"
         />
       </div>
       <div class="input-group">
         <label for="card-holder-name">Card holder name</label>
         <input
-          type="text"
-          id="card-holder-name"
-          v-model="cardHolderName"
-          placeholder="Enter card holder name"
-          required
+            id="card-holder-name"
+            v-model="cardHolderName"
+            placeholder="Enter card holder name"
+            required
+            type="text"
         />
       </div>
       <div class="input-group">
         <label for="description">Description</label>
         <input
-          type="text"
-          id="description"
-          v-model="description"
-          placeholder="Description"
+            id="description"
+            v-model="description"
+            placeholder="Description"
+            type="text"
         />
       </div>
       <div class="button-group">
-        <button type="button" class="cancel">Cancel</button>
-        <button type="submit" class="transfer">Transfer</button>
+        <button class="cancel" type="button">Cancel</button>
+        <button class="transfer" type="submit">Transfer</button>
       </div>
     </form>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+import {ref} from "vue";
 
 const account = ref("");
 const amount = ref("");
@@ -85,15 +85,18 @@ const handleTransfer = () => {
   background: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 .input-group {
   margin-bottom: 0.1rem;
 }
+
 label {
   display: block;
   margin-bottom: 0.1rem;
   font-weight: bold;
   font-size: 0.75rem;
 }
+
 input[type="text"],
 select {
   width: 100%;
@@ -102,10 +105,12 @@ select {
   border-radius: 5px;
   font-size: 0.75rem;
 }
+
 .button-group {
   display: flex;
   justify-content: space-between;
 }
+
 .button-group button {
   width: 48%;
   padding: 0.5rem;
@@ -114,10 +119,12 @@ select {
   cursor: pointer;
   font-size: 0.75rem; /* Smaller font size */
 }
+
 .button-group .cancel {
   background-color: #ccc;
   color: #333;
 }
+
 .button-group .transfer {
   background-color: #28a745;
   color: #fff;

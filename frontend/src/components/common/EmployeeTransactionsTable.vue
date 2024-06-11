@@ -1,5 +1,5 @@
 <script setup>
-import { formatTimestamp } from "./helpers.js";
+import {formatTimestamp} from "./helpers.js";
 
 defineProps({
   transactions: Array,

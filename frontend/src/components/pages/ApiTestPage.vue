@@ -3,5 +3,5 @@ import TransactionsContainer from "../containers/dashboard/transaction/Transacti
 </script>
 
 <template>
-  <TransactionsContainer />
+  <TransactionsContainer/>
 </template>

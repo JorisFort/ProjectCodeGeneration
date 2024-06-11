@@ -1,10 +1,10 @@
 <template>
   <div class="transfer-funds-page">
-    <Sidebar />
+    <Sidebar/>
     <!-- Sidebar component added -->
     <div class="form-container">
       <!-- Container for the form to separate it from the sidebar -->
-      <TransferFundsForm />
+      <TransferFundsForm/>
     </div>
   </div>
 </template>

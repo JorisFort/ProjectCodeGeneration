@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue';
+import {computed, ref} from 'vue';
 import SignupsTable from "../../common/SignupsTable.vue";
 
 let signups = [
@@ -91,7 +91,7 @@ const filteredSignups = computed(() => {
 
 <template>
 
-  <input v-model="searchQuery" type="text" placeholder="Search users"/>
+  <input v-model="searchQuery" placeholder="Search users" type="text"/>
   <SignupsTable :signups="filteredSignups"/>
 
 </template>

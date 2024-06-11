@@ -1,8 +1,8 @@
 <script setup>
-import { ref, computed } from 'vue';
+import {computed} from 'vue';
 import EmployeeTransactionsTable from "../../common/EmployeeTransactionsTable.vue";
 
-const props = defineProps( {
+const props = defineProps({
   id: String,
 });
 
@@ -87,5 +87,5 @@ const sortedTransactions = computed(() => {
 </script>
 
 <template>
-  <EmployeeTransactionsTable :transactions="sortedTransactions" />
+  <EmployeeTransactionsTable :transactions="sortedTransactions"/>
 </template>

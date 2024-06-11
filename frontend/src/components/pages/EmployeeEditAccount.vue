@@ -4,7 +4,9 @@ import EmployeeChangeAccountForm from "../containers/dashboard/EmployeeChangeAcc
 
 <template>
   <div>
-    <router-link to="/EmployeeAccount" class="backButton"><button>Back</button></router-link>
+    <router-link class="backButton" to="/EmployeeAccount">
+      <button>Back</button>
+    </router-link>
   </div>
   <EmployeeChangeAccountForm/>
 </template>

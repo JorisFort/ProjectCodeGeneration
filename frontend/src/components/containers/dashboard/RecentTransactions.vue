@@ -7,7 +7,7 @@
         <span>{{ transaction.name }}</span>
         <span>{{ transaction.date }}</span>
         <span
-          :class="{
+            :class="{
             income: transaction.amount > 0,
             expense: transaction.amount < 0,
           }"
@@ -20,11 +20,11 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import {ref} from "vue";
 
 const transactions = ref([
-  { id: 1, name: "Transaction 1", date: "2024-03-13", amount: -10000.0 },
-  { id: 2, name: "Transaction 2", date: "2024-03-14", amount: 10000.0 },
+  {id: 1, name: "Transaction 1", date: "2024-03-13", amount: -10000.0},
+  {id: 2, name: "Transaction 2", date: "2024-03-14", amount: 10000.0},
   // Add more transactions as needed
 ]);
 </script>
@@ -36,18 +36,22 @@ const transactions = ref([
   border-radius: 10px;
   margin-top: 2rem;
 }
+
 ul {
   list-style: none;
   padding: 0;
 }
+
 li {
   display: flex;
   justify-content: space-between;
   padding: 0.5rem 0;
 }
+
 .income {
   color: green;
 }
+
 .expense {
   color: red;
 }

@@ -1,5 +1,5 @@
 <script setup>
-import { formatTimestamp } from "./helpers.js";
+import {formatTimestamp} from "./helpers.js";
 
 defineProps({
   customers: Array,
@@ -26,7 +26,11 @@ defineProps({
       <td>{{ customer.bsn }}</td>
       <td>{{ customer.email }}</td>
       <td>{{ formatTimestamp(customer.dateRegistered) }}</td>
-      <td><router-link :to="{ name: 'EmployeeCustomerDetail', params: { id: customer.id }}"><button>View</button></router-link></td>
+      <td>
+        <router-link :to="{ name: 'EmployeeCustomerDetail', params: { id: customer.id }}">
+          <button>View</button>
+        </router-link>
+      </td>
     </tr>
     </tbody>
   </table>

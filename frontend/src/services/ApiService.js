@@ -21,7 +21,7 @@ export const apiCall = async (url, method, body = null) => {
         }
     } catch (error) {
         if (!error.isCustomError) {
-            console.error(error);
+            console.error(error.message);
             error.message = "Something went wrong. Please try again later.";
         }
 

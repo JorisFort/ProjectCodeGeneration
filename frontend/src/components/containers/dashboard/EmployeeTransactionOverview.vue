@@ -1,7 +1,6 @@
 <script setup>
-import { ref, computed } from 'vue';
+import {computed, ref} from 'vue';
 import EmployeeTransactionsTable from "../../common/EmployeeTransactionsTable.vue";
-import { getAllTransactions } from "@/services/TransactionService.js";
 
 let transactions = [
   {
@@ -74,7 +73,7 @@ const searchQuery = ref('');
 const filteredTransactions = computed(() => {
   return transactions.filter(transaction => {
     return Object.values(transaction).some(value =>
-    value.toString().toLowerCase().includes(searchQuery.value.toLowerCase())
+        value.toString().toLowerCase().includes(searchQuery.value.toLowerCase())
     );
   });
 });
@@ -90,8 +89,8 @@ const resultsAvailable = computed(() => {
 </script>
 
 <template>
-  <input v-model="searchQuery" type="text" placeholder="Search transactions"/>
+  <input v-model="searchQuery" placeholder="Search transactions" type="text"/>
 
-  <EmployeeTransactionsTable v-if="resultsAvailable" :transactions="filteredTransactions" />
+  <EmployeeTransactionsTable v-if="resultsAvailable" :transactions="filteredTransactions"/>
   <div v-else>No results found</div>
 </template>

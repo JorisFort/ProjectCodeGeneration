@@ -71,11 +71,12 @@ const submitForm = () => {
 
 <template>
   <form @submit.prevent="handleSubmit">
-    <input type="text" name="firstName" placeholder="First name" v-model="firstName" aria-invalid=""/>
-    <input type="text" name="lastName" placeholder="Last name" v-model="lastName" aria-invalid="">
-    <input type="email" name="email" placeholder="Email" v-model="email" aria-invalid=""/>
-    <input type="number" name="absoluteLimit" placeholder="Absolute transfer limit" v-model="absoluteLimit" aria-invalid=""/>
-    <input type="number" name="dailyLimit" placeholder="Daily transfer limit" v-model="dailyLimit" aria-invalid=""/>
+    <input v-model="firstName" aria-invalid="" name="firstName" placeholder="First name" type="text"/>
+    <input v-model="lastName" aria-invalid="" name="lastName" placeholder="Last name" type="text">
+    <input v-model="email" aria-invalid="" name="email" placeholder="Email" type="email"/>
+    <input v-model="absoluteLimit" aria-invalid="" name="absoluteLimit" placeholder="Absolute transfer limit"
+           type="number"/>
+    <input v-model="dailyLimit" aria-invalid="" name="dailyLimit" placeholder="Daily transfer limit" type="number"/>
     <button type="submit">Confirm change</button>
   </form>
 </template>

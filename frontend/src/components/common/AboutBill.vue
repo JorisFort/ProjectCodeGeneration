@@ -8,12 +8,12 @@
     <span class="fine-print">yet</span> been convicted of financial fraud!
   </p>
   <iframe
-    src="https://giphy.com/embed/QxHQ4BtLeEGBlWIFTs"
-    width="480"
-    height="480"
-    frameBorder="0"
-    class="giphy-embed"
-    allowFullScreen
+      allowFullScreen
+      class="giphy-embed"
+      frameBorder="0"
+      height="480"
+      src="https://giphy.com/embed/QxHQ4BtLeEGBlWIFTs"
+      width="480"
   ></iframe>
 </template>
 

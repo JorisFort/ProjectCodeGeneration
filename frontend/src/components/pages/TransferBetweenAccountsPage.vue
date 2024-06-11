@@ -1,8 +1,8 @@
 <template>
   <div class="transfer-between-accounts-page">
-    <Sidebar />
+    <Sidebar/>
     <div class="main-content">
-      <TransferBetweenAccountsForm />
+      <TransferBetweenAccountsForm/>
     </div>
   </div>
 </template>

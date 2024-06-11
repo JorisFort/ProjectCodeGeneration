@@ -25,20 +25,25 @@
   border-radius: 10px;
   margin-bottom: 1rem;
 }
+
 .balance-info {
   display: flex;
   justify-content: space-between;
 }
+
 .balance-item {
   text-align: center;
 }
+
 h3 {
   margin-bottom: 1rem;
 }
+
 h2 {
   margin: 0;
   font-size: 1.5rem;
 }
+
 span {
   display: block;
   margin-bottom: 0.5rem;

@@ -1,7 +1,7 @@
 <template>
   <div class="accounts-page">
     <h1>Accounts</h1>
-    <div class="account-section" v-for="account in accounts" :key="account.id">
+    <div v-for="account in accounts" :key="account.id" class="account-section">
       <div class="account-header">
         <h2>{{ account.name }}</h2>
         <p>Balance: {{ account.balance }}</p>
@@ -15,8 +15,8 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { useRouter } from "vue-router";
+import {ref} from "vue";
+import {useRouter} from "vue-router";
 
 const accounts = ref([
   {

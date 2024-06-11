@@ -22,7 +22,7 @@ const handleChangeSubmit = () => {
 const handlePasswordSubmit = () => {
   const isValid = validatePasswordForm();
 
-  if(isValid) {
+  if (isValid) {
     submitPasswordForm();
   }
 }
@@ -33,15 +33,13 @@ const validateChangeForm = () => {
   if (!email.value) {
     isValid = false;
     document.querySelector('[name="email"]').setAttribute('aria-invalid', 'true');
-  }
-  else {
+  } else {
     document.querySelector('[name="email"]').setAttribute('aria-invalid', 'false');
   }
   if (!phoneNumber.value) {
     isValid = false;
     document.querySelector('[name="phoneNumber"]').setAttribute('aria-invalid', 'true');
-  }
-  else {
+  } else {
     document.querySelector('[name="phoneNumber"]').setAttribute('aria-invalid', 'false');
   }
   return isValid;
@@ -53,15 +51,13 @@ const validatePasswordForm = () => {
   if (!currentPassword.value) {
     isValid = false;
     document.querySelector('[name="currentPassword"]').setAttribute('aria-invalid', 'true');
-  }
-  else {
+  } else {
     document.querySelector('[name="currentPassword"]').setAttribute('aria-invalid', 'false');
   }
   if (!newPassword.value) {
     isValid = false;
     document.querySelector('[name="newPassword"]').setAttribute('aria-invalid', 'true');
-  }
-  else {
+  } else {
     document.querySelector('[name="newPassword"]').setAttribute('aria-invalid', 'false');
   }
 
@@ -78,8 +74,8 @@ const submitPasswordForm = () => {
 <template>
 
   <form @submit.prevent="handleChangeSubmit">
-    <input type="email" name="email" placeholder="Email" v-model="email"/>
-    <input type="number" name="phoneNumber" placeholder="Phone number" v-model="phoneNumber"/>
+    <input v-model="email" name="email" placeholder="Email" type="email"/>
+    <input v-model="phoneNumber" name="phoneNumber" placeholder="Phone number" type="number"/>
     <button type="submit">Confirm changes</button>
   </form>
   <div v-if="!changePasswordField">
@@ -87,8 +83,8 @@ const submitPasswordForm = () => {
   </div>
   <div v-if="changePasswordField">
     <form @submit.prevent="handlePasswordSubmit">
-      <input type="password" name="currentPassword" placeholder="Current password" v-model="currentPassword"/>
-      <input type="password" name="newPassword" placeholder="New password" v-model="newPassword">
+      <input v-model="currentPassword" name="currentPassword" placeholder="Current password" type="password"/>
+      <input v-model="newPassword" name="newPassword" placeholder="New password" type="password">
       <button type="submit">Confirm password change</button>
     </form>
   </div>

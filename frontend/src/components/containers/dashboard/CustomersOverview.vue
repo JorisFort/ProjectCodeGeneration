@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue';
+import {computed, ref} from 'vue';
 import CustomersTable from "../../common/CustomersTable.vue";
 
 let customers = [
@@ -98,8 +98,8 @@ const resultsAvailable = computed(() => {
 </script>
 
 <template>
-  <input v-model="searchQuery" type="text" placeholder="Search customers"/>
+  <input v-model="searchQuery" placeholder="Search customers" type="text"/>
 
-  <CustomersTable v-if="resultsAvailable" :customers="filteredCustomers" />
+  <CustomersTable v-if="resultsAvailable" :customers="filteredCustomers"/>
   <div v-else>No results found</div>
 </template>

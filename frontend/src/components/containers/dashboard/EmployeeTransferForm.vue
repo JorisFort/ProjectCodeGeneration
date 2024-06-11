@@ -1,6 +1,6 @@
 <script setup>
-import { ref } from "vue";
-import { transfer } from "@/services/TransactionService.js"
+import {ref} from "vue";
+import {transfer} from "@/services/TransactionService.js"
 
 const senderName = ref('');
 const senderAccountNumber = ref('');
@@ -23,48 +23,42 @@ const validateForm = () => {
   if (!senderName.value) {
     isValid = false;
     document.querySelector('[name="senderName"]').setAttribute('aria-invalid', 'true');
-  }
-  else {
+  } else {
     document.querySelector('[name="senderName"]').setAttribute('aria-invalid', 'false');
   }
 
   if (!senderAccountNumber.value) {
     isValid = false;
     document.querySelector('[name="senderAccountNumber"]').setAttribute('aria-invalid', 'true');
-  }
-  else {
+  } else {
     document.querySelector('[name="senderAccountNumber"]').setAttribute('aria-invalid', 'false');
   }
 
   if (!recipientName.value) {
     isValid = false;
     document.querySelector('[name="recipientName"]').setAttribute('aria-invalid', 'true');
-  }
-  else {
+  } else {
     document.querySelector('[name="recipientName"]').setAttribute('aria-invalid', 'false');
   }
 
   if (!recipientAccountNumber.value) {
     isValid = false;
     document.querySelector('[name="recipientAccountNumber"]').setAttribute('aria-invalid', 'true');
-  }
-  else {
+  } else {
     document.querySelector('[name="recipientAccountNumber"]').setAttribute('aria-invalid', 'false');
   }
 
   if (!amount.value) {
     isValid = false;
     document.querySelector('[name="amount"]').setAttribute('aria-invalid', 'true');
-  }
-  else {
+  } else {
     document.querySelector('[name="amount"]').setAttribute('aria-invalid', 'false');
   }
 
   if (!description.value) {
     isValid = false;
     document.querySelector('[name="description"]').setAttribute('aria-invalid', 'true');
-  }
-  else {
+  } else {
     document.querySelector('[name="description"]').setAttribute('aria-invalid', 'false');
   }
 
@@ -91,15 +85,17 @@ const submitForm = async () => {
 <template>
   <form @submit.prevent="handleSubmit">
     <fieldset class="grid">
-      <input type="text" name="senderName" placeholder="Name sender" v-model="senderName" aria-invalid=""/>
-      <input type="text" name="senderAccountNumber" placeholder="Account number sender" v-model="senderAccountNumber" aria-invalid=""/>
+      <input v-model="senderName" aria-invalid="" name="senderName" placeholder="Name sender" type="text"/>
+      <input v-model="senderAccountNumber" aria-invalid="" name="senderAccountNumber" placeholder="Account number sender"
+             type="text"/>
     </fieldset>
     <fieldset class="grid">
-      <input type="text" name="recipientName" placeholder="Name recipient" v-model="recipientName" aria-invalid=""/>
-      <input type="text" name="recipientAccountNumber" placeholder="Account number recipient" v-model="recipientAccountNumber" aria-invalid=""/>
+      <input v-model="recipientName" aria-invalid="" name="recipientName" placeholder="Name recipient" type="text"/>
+      <input v-model="recipientAccountNumber" aria-invalid="" name="recipientAccountNumber"
+             placeholder="Account number recipient" type="text"/>
     </fieldset>
-    <input type="number" name="amount" placeholder="Amount" v-model="amount" aria-invalid=""/>
-    <input type="text" name="description" placeholder="Description" v-model="description" aria-invalid=""/>
+    <input v-model="amount" aria-invalid="" name="amount" placeholder="Amount" type="number"/>
+    <input v-model="description" aria-invalid="" name="description" placeholder="Description" type="text"/>
     <button type="submit">Transfer</button>
   </form>
 </template>

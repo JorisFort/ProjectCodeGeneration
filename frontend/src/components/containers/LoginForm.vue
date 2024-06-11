@@ -7,14 +7,14 @@
     <form @submit.prevent="handleLogin">
       <div class="input-group">
         <label for="email">Email</label>
-        <input type="email" id="email" v-model="state.email" required />
+        <input id="email" v-model="state.email" required type="email"/>
       </div>
       <div class="input-group">
         <label for="password">Password</label>
-        <input type="password" id="password" v-model="state.password" required />
+        <input id="password" v-model="state.password" required type="password"/>
       </div>
       <button type="submit">Login</button>
-      <router-link to="/register" class="register-link">Don't have an account? Register</router-link>
+      <router-link class="register-link" to="/register">Don't have an account? Register</router-link>
     </form>
   </div>
 </template>
@@ -37,12 +37,8 @@ const handleLogin = async () => {
   try {
     const response = await login(state.email, state.password);
     localStorage.setItem("jwtToken", response.token);
-    localStorage.setItem("user", response.user);
-    if (response.user.role === 'EMPLOYEE') {
-      await router.push('/employeeDashboard');
-    } else if (response.user.role === 'CUSTOMER') {
-      await router.push('/customerDashboard');
-    }
+    localStorage.setItem("user", JSON.stringify(response.user));
+    await router.push('/dashboard');
   } catch (err) {
     state.error = err.message;
   }

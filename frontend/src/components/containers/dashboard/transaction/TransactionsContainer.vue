@@ -1,7 +1,7 @@
 <script setup>
 import Loading from "../../../common/Loading.vue";
 import TransactionsTable from "../../../common/TransactionsTable.vue";
-import { useQueryClient, useQuery, useMutation } from "@tanstack/vue-query";
+import {useMutation, useQuery, useQueryClient} from "@tanstack/vue-query";
 
 /**
  * IMPORTANT! This is a demo file to show the basic pattern of using
@@ -34,7 +34,7 @@ function timeout(ms) {
 }
 
 // Query
-const { isLoading, isError, data, error } = useQuery({
+const {isLoading, isError, data, error} = useQuery({
   queryKey: ["transactions"],
   queryFn: async () => {
     // pretend we're asynchronously calling the API here to get the data...
@@ -45,7 +45,7 @@ const { isLoading, isError, data, error } = useQuery({
 
 // Mutation
 // we can also check isLoading, isError, error fields on out mutation
-const { mutate, isPending } = useMutation({
+const {mutate, isPending} = useMutation({
   mutationFn: async (data) => {
     // this data would normally get sent to the server here
     console.log("sending transaction to the API:", data);
@@ -59,7 +59,7 @@ const { mutate, isPending } = useMutation({
   },
   onSuccess: () => {
     // Invalidate the query so data gets refetched
-    queryClient.invalidateQueries({ queryKey: ["transactions"] });
+    queryClient.invalidateQueries({queryKey: ["transactions"]});
   },
 });
 
@@ -73,11 +73,11 @@ function onButtonClick() {
 </script>
 
 <template>
-  <span v-if="isLoading || isPending"><Loading /></span>
+  <span v-if="isLoading || isPending"><Loading/></span>
   <span v-else-if="isError">Error: {{ error.message }}</span>
   <!-- We can assume by this point that `isSuccess === true` -->
   <ul v-else-if="data.length">
-    <TransactionsTable :transactions="data" />
+    <TransactionsTable :transactions="data"/>
     <button @click="onButtonClick">Add Transaction</button>
   </ul>
   <div v-else>There are no transactions!</div>

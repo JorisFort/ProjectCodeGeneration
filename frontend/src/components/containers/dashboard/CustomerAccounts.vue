@@ -1,7 +1,7 @@
 <template>
   <div class="accounts-page">
     <h1>Accounts</h1>
-    <div class="account-section" v-for="account in accounts" :key="account.id">
+    <div v-for="account in accounts" :key="account.id" class="account-section">
       <div class="account-header">
         <h2>{{ account.name }}</h2>
         <p>Balance: {{ account.balance }}</p>
@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import {ref} from "vue";
 
 const accounts = ref([
   {
@@ -54,7 +54,7 @@ const accounts = ref([
         description: "Transfer from Checking",
         amount: "+$500.00",
       },
-      { id: 2, date: "2023-05-03", description: "Interest", amount: "+$5.00" },
+      {id: 2, date: "2023-05-03", description: "Interest", amount: "+$5.00"},
       // Add more transactions here
     ],
   },

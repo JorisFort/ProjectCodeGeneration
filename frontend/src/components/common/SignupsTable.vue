@@ -1,5 +1,5 @@
 <script setup>
-import { formatTimestamp } from "./helpers.js";
+import {formatTimestamp} from "./helpers.js";
 
 defineProps({
   signups: Array,
@@ -26,7 +26,9 @@ defineProps({
       <td>{{ signup.bsn }}</td>
       <td>{{ signup.email }}</td>
       <td>{{ formatTimestamp(signup.dateRegistered) }}</td>
-      <td><button>Approve</button></td>
+      <td>
+        <button>Approve</button>
+      </td>
     </tr>
     </tbody>
   </table>

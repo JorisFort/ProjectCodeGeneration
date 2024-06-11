@@ -11,7 +11,7 @@
       </div>
       <div v-if="action">
         <h3>{{ action.charAt(0).toUpperCase() + action.slice(1) }} Money</h3>
-        <input type="number" v-model="amount" placeholder="Enter amount" />
+        <input v-model="amount" placeholder="Enter amount" type="number"/>
         <button @click="performAction">{{ action }}</button>
       </div>
     </main>
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import {onMounted, ref} from 'vue';
 
 export default {
   name: 'ATM',
