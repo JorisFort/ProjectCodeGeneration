@@ -50,27 +50,25 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     const isAuthenticated = !!localStorage.getItem('jwtToken');
-    const user = localStorage.getItem('user');
 
-    if (to.matched.some(record => record.meta.requiresAuth)){
-        if (!isAuthenticated) {
-            next({ path: '/login' });
+    if (!isAuthenticated && to.path !== '/login') {
+        next({ path: '/login' });
+    } else if (isAuthenticated) {
+        const user = JSON.parse(localStorage.getItem('user'));
+        const toRole = to.meta.role;
+        // If the user is not authorized to access the page, redirect to the appropriate dashboard
+        if (toRole && toRole !== user.role) {
+            if (user.role === 'EMPLOYEE') {
+                next({path: '/employeeDashboard'});
+            } else if (user.role === 'CUSTOMER') {
+                next({path: '/customerDashboard'});
+            }
+        } else {
+            next();
         }
-        else if (to.meta.role && to.meta.role !== user.role) {
-            if (to.meta.role === 'Employee') {
-                next({ path: '/employeeDashboard' });
-            }
-            else if (to.meta.role === 'Customer') {
-                next({ path: '/customerDashboard' });
-            }
-            else {
-                next();
-            }
-        }
-    }
-    else {
+    } else {
         next();
     }
-})
+});
 
 export default router;
