@@ -4,13 +4,14 @@ import com.group4.projectcodegeneration.model.Account;
 import com.group4.projectcodegeneration.model.Customer;
 import com.group4.projectcodegeneration.service.AccountService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+@RestController
 @RequestMapping("/accounts")
 public class AccountController {
 
@@ -20,28 +21,20 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    @PostMapping
-    public ResponseEntity<Account> createAccount(@RequestBody Account account) {
-        Account createdAccount = accountService.createAccount(account);
-        return ResponseEntity.status(201).body(createdAccount);
-    }
-
     @GetMapping("/{accountId}")
     public ResponseEntity<Account> getAccountById(@PathVariable Long accountId) {
-        Optional<Account> account = accountService.getAccountById(accountId);
-        return account.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(404).build());
+        return accountService.getAccountById(accountId).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @PreAuthorize("hasRole('EMPLOYEE')")
     @GetMapping
     public ResponseEntity<List<Account>> getAllAccounts() {
-        List<Account> accounts = accountService.getAllAccounts();
-        return ResponseEntity.ok(accounts);
+        return ResponseEntity.ok(accountService.getAllAccounts());
     }
 
-    @GetMapping("/customer/{customerId}")
-    public ResponseEntity<Iterable<Account>> getAllCustomerAccounts(@RequestBody Customer customer) {
-        Iterable<Account> accounts = accountService.getAllCustomerAccounts(customer);
-        return ResponseEntity.ok(accounts);
+    @GetMapping("/customer/{userId}")
+    public ResponseEntity<List<Account>> getAllCustomerAccounts(@PathVariable Long userId) {
+        return ResponseEntity.ok(accountService.getAllCustomerAccounts(userId));
     }
 }
 

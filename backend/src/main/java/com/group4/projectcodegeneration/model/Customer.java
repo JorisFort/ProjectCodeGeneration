@@ -8,10 +8,10 @@ import lombok.Data;
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long customerId;
+    private Long userId;
 
     @OneToOne
+    @MapsId
     @JoinColumn(name = "userId")
     private User user;
 

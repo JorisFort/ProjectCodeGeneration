@@ -28,13 +28,13 @@ public class UserService {
         this.jwtProvider = jwtProvider;
     }
 
-    public User createUser(User user) throws IllegalArgumentException {
+    public void createUser(User user) {
         Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
         if (existingUser.isPresent()) {
             throw new IllegalArgumentException("Email is already in use");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
     public List<User> getAllUsers() {
@@ -44,8 +44,13 @@ public class UserService {
     public Optional<User> getUserById(Long userId) {
         return userRepository.findById(userId);
     }
+
     public Optional<User> getUserByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    public User updateUser(User user) {
+        return userRepository.save(user);
     }
 
     public LoginResponseDTO login(LoginRequestDTO loginRequest) throws AuthenticationException {
@@ -62,9 +67,7 @@ public class UserService {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String email = userDetails.getUsername();
 
-        Optional<User> optionalUser = getUserByEmail(email);
-        if (optionalUser.isEmpty()) throw new IllegalArgumentException("User not found");
-        return optionalUser.get();
+        return getUserByEmail(email).orElseThrow(() -> new IllegalArgumentException("User not found"));
     }
 }
 

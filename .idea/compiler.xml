@@ -11,6 +11,10 @@
         <module name="com.group4.ProjectCodeGeneration.main" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ProjectCodeGeneration_main" target="17" />
+      <module name="ProjectCodeGeneration_test" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_STRING" value="-parameters" />

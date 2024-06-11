@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/ProjectCodeGeneration.iml" filepath="$PROJECT_DIR$/.idea/ProjectCodeGeneration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.group4.ProjectCodeGeneration.main.iml" filepath="$PROJECT_DIR$/.idea/modules/com.group4.ProjectCodeGeneration.main.iml" />
     </modules>
   </component>
 </project>

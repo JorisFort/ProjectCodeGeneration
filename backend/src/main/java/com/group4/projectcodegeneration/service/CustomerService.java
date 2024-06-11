@@ -25,10 +25,6 @@ public class CustomerService {
         this.jwtProvider = jwtProvider;
     }
 
-    public Customer createCustomer(Customer customer) {
-        return customerRepository.save(customer);
-    }
-
     public void updateCustomer(Customer customer) {
         customerRepository.save(customer);
     }
@@ -41,12 +37,12 @@ public class CustomerService {
         return customerRepository.findByAccountApprovedFalse();
     }
 
-    public LoginResponseDTO register(RegisterRequestDTO registerRequestDto) throws IllegalArgumentException {
+    public LoginResponseDTO register(RegisterRequestDTO registerRequestDto) {
         User user = new User();
         user.setEmail(registerRequestDto.email());
         user.setPassword(registerRequestDto.password());
         user.setRole(UserRole.CUSTOMER);
-        userService.createUser(user); // throws IllegalArgumentException if email is already in use
+        userService.createUser(user);
 
         Customer customer = new Customer();
         customer.setFirstName(registerRequestDto.firstName());
@@ -54,13 +50,13 @@ public class CustomerService {
         customer.setPhoneNumber(registerRequestDto.phoneNumber());
         customer.setBsnNumber(registerRequestDto.bsnNumber());
         customer.setUser(user);
-        createCustomer(customer);
+        customerRepository.save(customer);
 
         return new LoginResponseDTO(user.getEmail(), jwtProvider.createToken(user));
     }
 
-    public Customer approveCustomer(Long customerId) {
-        Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
+    public Customer approveCustomer(Long userId) {
+        Optional<Customer> optionalCustomer = customerRepository.findById(userId);
         if (optionalCustomer.isPresent()) {
             Customer customer = optionalCustomer.get();
             customer.setAccountApproved(true);

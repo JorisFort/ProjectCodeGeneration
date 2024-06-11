@@ -2,13 +2,17 @@ package com.group4.projectcodegeneration.controller;
 
 import com.group4.projectcodegeneration.model.Transaction;
 import com.group4.projectcodegeneration.model.User;
+import com.group4.projectcodegeneration.model.UserRole;
 import com.group4.projectcodegeneration.model.dto.TransactionDTO;
 import com.group4.projectcodegeneration.service.TransactionService;
 import com.group4.projectcodegeneration.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -24,39 +28,19 @@ public class TransactionController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> createTransaction(@RequestBody TransactionDTO transaction) {
-        try {
-            Transaction createdTransaction = transactionService.createTransaction(transaction);
-            return ResponseEntity.status(HttpStatus.CREATED).body(createdTransaction);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ResponseEntity<Transaction> createTransaction(@RequestBody TransactionDTO transaction) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(transactionService.createTransaction(transaction));
     }
 
+    @PreAuthorize("hasRole('EMPLOYEE')")
     @GetMapping
-    public ResponseEntity<Iterable<Transaction>> getAllTransactions() {
-        Iterable<Transaction> transactions = transactionService.getAllTransactions();
-        return ResponseEntity.ok(transactions);
-    }
-
-    @GetMapping("/{transactionId}")
-    public ResponseEntity<Transaction> getTransactionById(@PathVariable Long transactionId) {
-        Optional<Transaction> transaction = transactionService.getTransactionById(transactionId);
-        return transaction.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(404).build());
+    public ResponseEntity<List<Transaction>> getAllTransactions() {
+        return ResponseEntity.ok(transactionService.getAllTransactions());
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<Iterable<Transaction>> getTransactionsByUser(@PathVariable Long userId) {
-        Optional<User> optionalUser = userService.getUserById(userId);
-
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-
-            Iterable<Transaction> transactions = transactionService.getTransactionsByUser(user);
-            return ResponseEntity.ok(transactions);
-        } else {
-            return ResponseEntity.status(404).build();
-        }
+    public ResponseEntity<List<Transaction>> getTransactionsByUser(@PathVariable Long userId) {
+        return userService.getUserById(userId).map(user -> ResponseEntity.ok(transactionService.getTransactionsByUser(user))).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 }
 

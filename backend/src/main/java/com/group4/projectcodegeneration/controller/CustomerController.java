@@ -3,6 +3,7 @@ package com.group4.projectcodegeneration.controller;
 import com.group4.projectcodegeneration.model.Customer;
 import com.group4.projectcodegeneration.service.CustomerService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Iterator;
@@ -19,27 +20,24 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @PostMapping
-    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
-        Customer createdCustomer = customerService.createCustomer(customer);
-        return ResponseEntity.status(201).body(createdCustomer);
-    }
-
+    @PreAuthorize("hasRole('EMPLOYEE')")
     @GetMapping("/{customerId}")
     public ResponseEntity<Customer> getCustomerById(@PathVariable Long customerId) {
         Optional<Customer> customer = customerService.getCustomerById(customerId);
         return customer.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(404).build());
     }
 
+    @PreAuthorize("hasRole('EMPLOYEE')")
     @GetMapping("/unapproved")
     public ResponseEntity<List<Customer>> getAllUnapprovedCustomers() {
         List<Customer> customers = customerService.getAllUnapprovedCustomers();
         return ResponseEntity.ok(customers);
     }
 
-    @PutMapping("/{customerId}/approve")
-    public ResponseEntity<Customer> approveCustomer(@PathVariable Long customerId) {
-        Customer customer = customerService.approveCustomer(customerId);
+    @PreAuthorize("hasRole('EMPLOYEE')")
+    @PutMapping("/{userId}/approve")
+    public ResponseEntity<Customer> approveCustomer(@PathVariable Long userId) {
+        Customer customer = customerService.approveCustomer(userId);
         if (customer != null) {
             return ResponseEntity.ok(customer);
         } else {
@@ -47,6 +45,7 @@ public class CustomerController {
         }
     }
 
+    @PreAuthorize("hasRole('EMPLOYEE')")
     @PutMapping("/{customerId}/close")
     public ResponseEntity<Customer> closeCustomer(@PathVariable Long customerId) {
         Customer customer = customerService.closeCustomer(customerId);

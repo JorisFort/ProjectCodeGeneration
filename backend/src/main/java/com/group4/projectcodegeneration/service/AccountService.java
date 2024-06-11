@@ -5,6 +5,7 @@ import com.group4.projectcodegeneration.model.Customer;
 import com.group4.projectcodegeneration.repository.AccountRepository;
 import com.group4.projectcodegeneration.repository.CustomerRepository;
 import com.group4.projectcodegeneration.util.IbanGenerator;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,7 +42,8 @@ public class AccountService {
         return accountRepository.findAll();
     }
 
-    public List<Account> getAllCustomerAccounts(Customer customer) {
+    public List<Account> getAllCustomerAccounts(Long userId) {
+        Customer customer = customerRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("Customer not found"));
         return accountRepository.findByCustomer(customer);
     }
 
