@@ -3,14 +3,35 @@
     <h3>Accounts</h3>
     <div class="account-item">
       <span>Checking</span>
-      <h2>$44,500.00</h2>
+      <h2>€ {{state.checkingBalance}}</h2>
     </div>
     <div class="account-item">
       <span>Savings</span>
-      <h2>$44,500.00</h2>
+      <h2>€ {{state.savingsBalance}}</h2>
     </div>
   </div>
 </template>
+
+<script setup>
+import {reactive} from "vue";
+import {onMounted} from 'vue';
+import {getAllAccountsFromCustomer} from "@/services/AccountService.js";
+
+const state = reactive({
+  checkingBalance: "",
+  savingsBalance: "",
+});
+
+onMounted(async () => {
+  const user = JSON.parse(localStorage.getItem('user'));
+  const accounts = await getAllAccountsFromCustomer(user.id);
+
+  if (accounts) {
+    state.checkingBalance = accounts.find(a => a.accountType === 'CHECKING')?.balance;
+    state.savingsBalance = accounts.find(a => a.accountType === 'SAVINGS')?.balance;
+  }
+});
+</script>
 
 <style scoped>
 .account-summary {

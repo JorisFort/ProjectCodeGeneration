@@ -87,7 +87,7 @@ public class TransactionService {
         User authenticatedUser = userService.getAuthenticatedUser();
 
         // Only the user themselves or an employee can view the transactions of a user
-        if (authenticatedUser.getRole() == UserRole.CUSTOMER && !user.equals(userService.getAuthenticatedUser()))
+        if (authenticatedUser.getRole() == UserRole.ROLE_CUSTOMER && !user.equals(userService.getAuthenticatedUser()))
             throw new InsufficientAuthenticationException("You are not authorized to view this user's transactions.");
 
         return transactionRepository.findByInitiatedBy(user);

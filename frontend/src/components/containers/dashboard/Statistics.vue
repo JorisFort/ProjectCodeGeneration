@@ -4,19 +4,49 @@
     <div class="stat-item">
       <span>Income</span>
       <div class="progress">
-        <div :style="{ width: '80%' }" class="progress-bar income"></div>
+        <div :style="{ width: state.incomePercentage + '%' }" class="progress-bar income"></div>
       </div>
-      <span>$54,500.00</span>
+      <span>€ {{state.income}}</span>
     </div>
     <div class="stat-item">
       <span>Expense</span>
       <div class="progress">
-        <div :style="{ width: '20%' }" class="progress-bar expense"></div>
+        <div :style="{ width: state.expensePercentage + '%' }" class="progress-bar expense"></div>
       </div>
-      <span>$10,000.00</span>
+      <span>€ {{state.expense}}</span>
     </div>
   </div>
 </template>
+
+<script setup>
+import { onMounted, reactive } from "vue";
+import {getAllTransactionByUser} from "@/services/TransactionService.js";
+
+const state = reactive({
+  income: 0,
+  expense: 0,
+  incomePercentage: 0,
+  expensePercentage: 0
+});
+
+onMounted(async () => {
+  const user = JSON.parse(localStorage.getItem('user'));
+  const transactions = await getAllTransactionByUser(user.id);
+
+  state.income = transactions
+      .filter(t => t.transactionType === 'DEPOSIT')
+      .reduce((sum, t) => sum + t.amount, 0);
+
+  state.expense = transactions
+      .filter(t => t.transactionType === 'WITHDRAW' || t.transactionType === 'TRANSFER')
+      .reduce((sum, t) => sum + t.amount, 0);
+
+  const totalAmount = state.income + state.expense;
+
+  state.incomePercentage = (state.income / totalAmount) * 100;
+  state.expensePercentage = (state.expense / totalAmount) * 100;
+});
+</script>
 
 <style scoped>
 .statistics {

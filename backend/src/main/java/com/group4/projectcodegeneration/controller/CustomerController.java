@@ -20,11 +20,9 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @PreAuthorize("hasRole('EMPLOYEE')")
     @GetMapping("/{customerId}")
     public ResponseEntity<Customer> getCustomerById(@PathVariable Long customerId) {
-        Optional<Customer> customer = customerService.getCustomerById(customerId);
-        return customer.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(404).build());
+        return customerService.getCustomerById(customerId).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PreAuthorize("hasRole('EMPLOYEE')")

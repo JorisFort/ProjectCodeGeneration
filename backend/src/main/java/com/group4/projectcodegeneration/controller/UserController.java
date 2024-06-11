@@ -23,10 +23,9 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PreAuthorize("hasRole('EMPLOYEE')")
     @GetMapping
+    @PreAuthorize("hasRole('EMPLOYEE')")
     public ResponseEntity<List<User>> getAllUsers() {
-        System.out.println("Getting all users");
         return ResponseEntity.ok(userService.getAllUsers());
     }
 

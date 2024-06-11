@@ -1,9 +1,5 @@
-import {apiCall} from "@/services/ApiService.js";
+import {apiCall} from "./ApiService";
 
-export const getAllTransactions = () => {
-    return apiCall("http://localhost:8080/getAllTransactions", "GET")
-}
-
-export const transfer = (newTransfer) => {
-    return apiCall("http://localhost:8080/transfer", "POST", {newTransfer})
-}
+export const getAllTransactionByUser = (id) => {
+    return apiCall("http://localhost:8080/transactions/user/" + id, "GET");
+};

@@ -11,20 +11,19 @@ export const apiCall = async (url, method, body = null) => {
             options.body = JSON.stringify(body);
         }
 
+        const jwtToken = localStorage.getItem('jwtToken');
+        if (jwtToken) {
+            options.headers['Authorization'] = `Bearer ${jwtToken}`;
+        }
+
         const response = await fetch(url, options);
         if (response.ok) {
             return await response.json();
         } else {
-            const error = new Error(await response.text());
-            error.isCustomError = true;
-            throw error;
+            throw new Error(await response.text());
         }
     } catch (error) {
-        if (!error.isCustomError) {
-            console.error(error.message);
-            error.message = "Something went wrong. Please try again later.";
-        }
-
+        console.error('API call failed:', error);
         throw error;
     }
 };

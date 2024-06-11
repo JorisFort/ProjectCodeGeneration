@@ -24,6 +24,12 @@ public class Customer {
     private Double dailyTransferAmount;
     private Double absoluteTransferLimit;
 
+    public Customer() {
+        this.dailyTransferLimit = 10000.0;
+        this.dailyTransferAmount = 0.0;
+        this.absoluteTransferLimit = 10000.0;
+    }
+
     public void addDailyTransferAmount(double amount) {
         this.dailyTransferAmount += amount;
     }

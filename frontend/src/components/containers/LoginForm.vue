@@ -38,7 +38,11 @@ const handleLogin = async () => {
     const response = await login(state.email, state.password);
     localStorage.setItem("jwtToken", response.token);
     localStorage.setItem("user", JSON.stringify(response.user));
-    await router.push('/dashboard');
+    if (response.user.role === 'ROLE_EMPLOYEE') {
+      await router.push('/employeeDashboard');
+    } else if (response.user.role === 'ROLE_CUSTOMER') {
+      await router.push('/customerDashboard');
+    }
   } catch (err) {
     state.error = err.message;
   }

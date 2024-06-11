@@ -6,14 +6,6 @@
         <span>Current Balance</span>
         <h2>$44,500.00</h2>
       </div>
-      <div class="balance-item">
-        <span>Income</span>
-        <h2>$54,500.00</h2>
-      </div>
-      <div class="balance-item">
-        <span>Expense</span>
-        <h2>$10,000.00</h2>
-      </div>
     </div>
   </div>
 </template>

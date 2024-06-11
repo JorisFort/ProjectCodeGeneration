@@ -6,6 +6,7 @@ import com.group4.projectcodegeneration.model.dto.RegisterRequestDto;
 import com.group4.projectcodegeneration.model.dto.UserDto;
 import com.group4.projectcodegeneration.repository.CustomerRepository;
 import com.group4.projectcodegeneration.security.JwtProvider;
+import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,6 +32,9 @@ public class CustomerService {
     }
 
     public Optional<Customer> getCustomerById(Long customerId) {
+        User authenticatedUser = userService.getAuthenticatedUser();
+        if (authenticatedUser.getRole() == UserRole.ROLE_CUSTOMER && !authenticatedUser.getId().equals(customerId)) throw new InsufficientAuthenticationException("You are not authorized to view this customer");
+
         return customerRepository.findById(customerId);
     }
 
@@ -42,7 +46,7 @@ public class CustomerService {
         User user = new User();
         user.setEmail(registerRequestDto.email());
         user.setPassword(registerRequestDto.password());
-        user.setRole(UserRole.CUSTOMER);
+        user.setRole(UserRole.ROLE_CUSTOMER);
         userService.createUser(user);
 
         Customer customer = new Customer();

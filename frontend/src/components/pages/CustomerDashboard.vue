@@ -5,8 +5,8 @@
       <header class="header">
         <h1>Overview</h1>
         <div class="user-info">
-          <span class="username">John Doe</span>
-          <span class="account-number">1234567890</span>
+          <span class="username">{{ state.name }}</span>
+          <span class="account-number">{{ state.id }}</span>
         </div>
       </header>
       <div class="content">
@@ -23,6 +23,23 @@
 import AccountBalance from "../common/AccountBalance.vue";
 import AccountSummary from "../common/AccountSummary.vue";
 import Statistics from "../containers/dashboard/Statistics.vue";
+import {getCustomer} from "@/services/CustomerService.js";
+import {reactive} from "vue";
+import { onMounted } from 'vue';
+
+const state = reactive({
+  name: "",
+  id: "",
+});
+
+onMounted(async () => {
+  const user = JSON.parse(localStorage.getItem('user'));
+  const customer = await getCustomer(user.id);
+
+  state.name = customer.firstName + ' ' + customer.lastName;
+  state.id = user.id;
+});
+
 </script>
 
 <style scoped>

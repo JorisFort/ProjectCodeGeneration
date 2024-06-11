@@ -1,6 +1,6 @@
 <script setup>
 import {ref} from "vue";
-import {transfer} from "@/services/TransactionService.js"
+//import {transfer} from "@/services/TransactionService.js"
 
 const senderName = ref('');
 const senderAccountNumber = ref('');
