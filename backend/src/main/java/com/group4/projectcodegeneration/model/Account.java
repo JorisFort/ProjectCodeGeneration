@@ -1,5 +1,6 @@
 package com.group4.projectcodegeneration.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -16,6 +17,7 @@ public class Account {
     private Double balance;
     @ManyToOne
     @JoinColumn(name = "customerId")
+    @JsonIgnore
     private Customer customer;
 
     public Account() {

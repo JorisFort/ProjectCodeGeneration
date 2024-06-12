@@ -33,8 +33,6 @@ onMounted(async () => {
   const user = JSON.parse(localStorage.getItem('user'));
   const transactions = await getAllTransactionByUser(user.id);
 
-  console.log(transactions)
-
   state.income = transactions
       .filter(t => t.transactionType === 'DEPOSIT')
       .reduce((sum, t) => sum + t.amount, 0);

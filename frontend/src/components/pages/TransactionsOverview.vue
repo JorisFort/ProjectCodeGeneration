@@ -1,19 +1,18 @@
 <template>
-  <div class="transactions-overview">
-    <!-- Removed Sidebar -->
+  <div class="dashboard">
+    <Sidebar/>
     <div class="main-content">
       <header class="header">
         <h1>Checking Account Transactions</h1>
         <div class="user-info">
-          <span class="username">John Doe</span>
-          <span class="account-number">1234567890</span>
+          <span class="username">{{state.name}}</span>
+          <span class="account-number">{{state.id}}</span>
         </div>
       </header>
-      <div class="account-details">
-        <h2>Account Balance: $44,500.00</h2>
-        <p><strong>IBAN:</strong> GB29NWBK60161331926819</p>
+      <div class="content">
+        <h2>Account Balance: € {{ state.balance }}</h2>
+        <p><strong>IBAN:</strong> {{state.iban}}</p>
       </div>
-      <!-- <TransactionCards /> -->
       <TransactionList/>
     </div>
   </div>
@@ -21,19 +20,48 @@
 
 <script setup>
 import TransactionList from "../containers/dashboard/transaction/TransactionList.vue";
+import Sidebar from "../common/CustomerNavigation.vue";
+import { onMounted, reactive } from 'vue';
+import { useRoute} from "vue-router";
+import {getCustomer} from "@/services/CustomerService.js";
+
+const state = reactive({
+  name: "",
+  id: "",
+  balance: 0,
+  iban: ""
+});
+
+const route = useRoute();
+
+onMounted(async() => {
+  const user = JSON.parse(localStorage.getItem('user'));
+  const customer = await getCustomer(user.id);
+
+  state.name = customer.firstName + ' ' + customer.lastName;
+  state.id = user.id;
+
+  const account = route.params.account;
+
+  console.log(account);
+
+  state.balance = account.balance;
+  state.iban = account.iban;
+});
+
+
 </script>
 
 <style scoped>
-.transactions-overview {
+.dashboard {
   display: flex;
-  flex-direction: column; /* Changed to column to make it longer */
 }
 
 .main-content {
   flex: 1;
   padding: 2rem;
   background: #f7f9fc;
-  width: 100%; /* Ensure full width */
+  width: 100%;
 }
 
 .header {
@@ -43,7 +71,15 @@ import TransactionList from "../containers/dashboard/transaction/TransactionList
   margin-bottom: 2rem;
 }
 
-.account-details {
+.content {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  padding: 2rem; /* Increased padding */
+}
+
+.content {
   background: #ffffff;
   padding: 2rem;
   border-radius: 10px;

@@ -1,60 +1,69 @@
 <template>
-  <div class="accounts-page">
-    <h1>Accounts</h1>
-    <div v-for="account in accounts" :key="account.id" class="account-section">
-      <div class="account-header">
-        <h2>{{ account.name }}</h2>
-        <p>Balance: {{ account.balance }}</p>
-      </div>
-      <div class="account-details">
-        <p><strong>IBAN:</strong> {{ account.iban }}</p>
-        <button class="view-button" @click="viewAccount(account)">View</button>
+  <div class="dashboard">
+    <Sidebar/>
+    <div class="main-content">
+      <header class="header">
+        <h1>Accounts</h1>
+      </header>
+      <div v-for="account in accounts" :key="account.id" class="content">
+        <div class="account-header">
+          <h2>{{ account.accountType }}</h2>
+          <p>Balance: € {{ account.balance }}</p>
+        </div>
+        <div class="account-details">
+          <p><strong>IBAN:</strong> {{ account.iban }}</p>
+          <button class="view-button" @click="viewAccount(account)">View</button>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import {ref} from "vue";
+import Sidebar from "../common/CustomerNavigation.vue";
+import {onMounted, ref} from "vue";
 import {useRouter} from "vue-router";
+import {getAllAccountsFromCustomer} from "@/services/AccountService.js";
 
-const accounts = ref([
-  {
-    id: 1,
-    name: "Checking",
-    balance: "$2,500.00",
-    iban: "GB29NWBK60161331926819",
-  },
-  {
-    id: 2,
-    name: "Savings",
-    balance: "$10,000.00",
-    iban: "GB29NWBK60161331926820",
-  },
-]);
+const accounts = ref([]);
+
+onMounted(async () => {
+  const user = JSON.parse(localStorage.getItem('user'));
+  accounts.value = await getAllAccountsFromCustomer(user.id);
+});
 
 const router = useRouter();
 
 const viewAccount = (account) => {
+  console.log(account);
   router.push({
     path: "/dashboard/transactions",
     params: {
-      name: account.name,
-      balance: account.balance,
-      iban: account.iban,
+      account: account
     },
   });
 };
 </script>
 
 <style scoped>
-.accounts-page {
-  max-width: 1200px; /* Increased max-width for more space */
-  margin: 0 auto;
-  padding: 2rem;
+.dashboard {
+  display: flex;
 }
 
-.account-section {
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  background: #f7f9fc;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.content {
   background: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -92,5 +101,20 @@ const viewAccount = (account) => {
 
 .view-button:hover {
   background-color: #218838;
+}
+
+
+
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  background: #f7f9fc;
+}
+
+
+
+.content {
+  display: flex;
+  flex-direction: column;
 }
 </style>
