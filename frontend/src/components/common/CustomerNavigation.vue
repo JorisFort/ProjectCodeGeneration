@@ -23,11 +23,23 @@
         </router-link>
       </nav>
       <div class="logout">
-        <router-link class="nav-link" to="/logout">Logout</router-link>
+        <button class="nav-link" @click="logout">Logout</button>
       </div>
     </div>
   </aside>
 </template>
+
+<script setup>
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const logout = () => {
+  localStorage.removeItem('user');
+  localStorage.removeItem('jwtToken');
+  router.push('/login');
+};
+</script>
 
 <style scoped>
 .sidebar {
@@ -76,10 +88,12 @@ nav {
 .logout .nav-link {
   color: #333;
   text-decoration: none;
+  background-color: transparent;
+  border: none;
 }
 
 .logout .nav-link:hover {
   color: #ff0000;
-  background-color: transparent;
+  background-color: #d0e0fc;
 }
 </style>

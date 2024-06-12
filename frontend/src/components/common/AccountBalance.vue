@@ -4,11 +4,30 @@
     <div class="balance-info">
       <div class="balance-item">
         <span>Current Balance</span>
-        <h2>$44,500.00</h2>
+        <h2>€ {{state.balance}}</h2>
       </div>
     </div>
   </div>
 </template>
+
+<script setup>
+import {reactive, onMounted} from "vue";
+import {getAllAccountsFromCustomer} from "@/services/AccountService.js";
+
+const state = reactive({
+  balance: "",
+});
+
+onMounted(async () => {
+  const user = JSON.parse(localStorage.getItem('user'));
+  const accounts = await getAllAccountsFromCustomer(user.id);
+
+  if (accounts) {
+    state.balance = accounts.reduce((total, account) => total + account.balance, 0);
+  }
+});
+
+</script>
 
 <style scoped>
 .account-balance {

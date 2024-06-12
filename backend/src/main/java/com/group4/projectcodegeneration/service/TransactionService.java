@@ -90,7 +90,9 @@ public class TransactionService {
         if (authenticatedUser.getRole() == UserRole.ROLE_CUSTOMER && !user.equals(userService.getAuthenticatedUser()))
             throw new InsufficientAuthenticationException("You are not authorized to view this user's transactions.");
 
-        return transactionRepository.findByInitiatedBy(user);
+        List<Account> accounts = accountService.getAllCustomerAccounts(user.getId());
+
+        return transactionRepository.findByFromAccountInOrToAccountIn(accounts, accounts);
     }
 }
 
