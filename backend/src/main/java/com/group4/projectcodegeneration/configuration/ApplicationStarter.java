@@ -1,4 +1,4 @@
-package com.group4.projectcodegeneration;
+package com.group4.projectcodegeneration.configuration;
 
 import com.group4.projectcodegeneration.model.User;
 import com.group4.projectcodegeneration.model.UserRole;
@@ -32,5 +32,21 @@ public class ApplicationStarter implements ApplicationRunner {
         LoginResponseDto employeeLogin = userService.login(new LoginRequestDto(email, password));
         System.out.println("Employee email: " + email + " password: " + password);
         System.out.println("Employee token: " + employeeLogin.token());
+
+        System.out.println();
+
+        // Create a customer
+        User customer = new User();
+        email = "customer@customer.nl";
+        password = "123";
+
+        customer.setEmail(email);
+        customer.setPassword(password);
+        customer.setRole(UserRole.ROLE_CUSTOMER);
+        userService.createUser(customer);
+
+        LoginResponseDto customerLogin = userService.login(new LoginRequestDto(email, password));
+        System.out.println("Customer email: " + email + " password: " + password);
+        System.out.println("Customer token: " + customerLogin.token());
     }
 }

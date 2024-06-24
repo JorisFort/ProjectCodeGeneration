@@ -5,6 +5,7 @@ import com.group4.projectcodegeneration.service.EmailUserDetailsService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +17,8 @@ import java.util.Date;
 @Component
 public class JwtProvider {
 
+    @Value("${application.token.validity}")
+    private long validityInMicroseconds;
     private final JwtKeyProvider keyProvider;
     private final EmailUserDetailsService userDetailsService;
 
@@ -26,7 +29,7 @@ public class JwtProvider {
 
     public String createToken(User user) {
         Date now = new Date();
-        Date expiration = new Date(now.getTime() + 36000000);
+        Date expiration = new Date(now.getTime() + validityInMicroseconds);
 
         return Jwts.builder()
                 .subject(user.getEmail())

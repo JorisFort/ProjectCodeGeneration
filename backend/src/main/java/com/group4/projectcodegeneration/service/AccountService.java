@@ -32,10 +32,10 @@ public class AccountService {
         return accountRepository.save(account);
     }
 
-    public void updateAccount(Account account) {
+    public Account updateAccount(Account account) {
         // When an account is updated, the customer should be updated as well to keep the daily limit updated
         customerRepository.save(account.getCustomer());
-        accountRepository.save(account);
+        return accountRepository.save(account);
     }
 
     public List<Account> getAllAccounts() {
