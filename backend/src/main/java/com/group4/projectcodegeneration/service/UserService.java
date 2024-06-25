@@ -29,13 +29,13 @@ public class UserService {
         this.jwtProvider = jwtProvider;
     }
 
-    public void createUser(User user) {
+    public User createUser(User user) {
         Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
         if (existingUser.isPresent()) {
             throw new IllegalArgumentException("Email is already in use");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
     public List<User> getAllUsers() {

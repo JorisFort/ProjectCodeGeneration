@@ -35,23 +35,15 @@ public class CustomerController {
     @PreAuthorize("hasRole('EMPLOYEE')")
     @PutMapping("/{userId}/approve")
     public ResponseEntity<Customer> approveCustomer(@PathVariable Long userId) {
-        Customer customer = customerService.approveCustomer(userId);
-        if (customer != null) {
-            return ResponseEntity.ok(customer);
-        } else {
-            return ResponseEntity.status(404).build();
-        }
+        Optional<Customer> customer = customerService.approveCustomer(userId);
+        return customer.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PreAuthorize("hasRole('EMPLOYEE')")
     @PutMapping("/{customerId}/close")
     public ResponseEntity<Customer> closeCustomer(@PathVariable Long customerId) {
-        Customer customer = customerService.closeCustomer(customerId);
-        if (customer != null) {
-            return ResponseEntity.ok(customer);
-        } else {
-            return ResponseEntity.status(404).build();
-        }
+        Optional<Customer> customer = customerService.closeCustomer(customerId);
+        return customer.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
 

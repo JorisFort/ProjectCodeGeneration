@@ -19,10 +19,10 @@
 </template>
 
 <script setup>
-import Sidebar from "../common/CustomerNavigation.vue";
-import AccountBalance from "../common/AccountBalance.vue";
-import AccountSummary from "../common/AccountSummary.vue";
-import Statistics from "../containers/dashboard/Statistics.vue";
+import Sidebar from "../../common/CustomerNavigation.vue";
+import AccountBalance from "../../common/AccountBalance.vue";
+import AccountSummary from "../../common/AccountSummary.vue";
+import Statistics from "../../containers/dashboard/Statistics.vue";
 import {getCustomer} from "@/services/CustomerService.js";
 import {reactive} from "vue";
 import { onMounted } from 'vue';

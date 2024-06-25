@@ -1,6 +1,7 @@
 package com.group4.projectcodegeneration.controller;
 
 import com.group4.projectcodegeneration.model.Transaction;
+import com.group4.projectcodegeneration.model.User;
 import com.group4.projectcodegeneration.model.dto.TransactionDto;
 import com.group4.projectcodegeneration.service.TransactionService;
 import com.group4.projectcodegeneration.service.UserService;
@@ -25,7 +26,8 @@ public class TransactionController {
 
     @PostMapping
     public ResponseEntity<Transaction> createTransaction(@RequestBody TransactionDto transaction) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(transactionService.createTransaction(transaction));
+        User user = userService.getAuthenticatedUser();
+        return ResponseEntity.status(HttpStatus.CREATED).body(transactionService.createTransaction(transaction, user));
     }
 
     @PreAuthorize("hasRole('EMPLOYEE')")

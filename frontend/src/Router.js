@@ -3,7 +3,7 @@ import LoginPage from "./components/pages/LoginPage.vue";
 import RegisterPage from "./components/pages/RegisterPage.vue";
 import TransferFundsPage from "./components/pages/TransferFundsPage.vue";
 import TransferBetweenAccountsPage from "./components/pages/TransferBetweenAccountsPage.vue";
-import CustomerDashboard from "./components/pages/CustomerDashboard.vue";
+import CustomerDashboard from "./components/pages/customer/CustomerDashboard.vue";
 import TransactionsOverview from "./components/pages/TransactionsOverview.vue";
 import AccountDetails from "./components/pages/AccountDetails.vue";
 import AccountsPage from "./components/pages/AccountsPage.vue";

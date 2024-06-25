@@ -8,6 +8,7 @@ import com.group4.projectcodegeneration.repository.CustomerRepository;
 import com.group4.projectcodegeneration.security.JwtProvider;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -42,25 +43,29 @@ public class CustomerService {
         return customerRepository.findByAccountApprovedFalse();
     }
 
+    @Transactional
     public LoginResponseDto register(RegisterRequestDto registerRequestDto) {
+        // Create and save the User
         User user = new User();
         user.setEmail(registerRequestDto.email());
         user.setPassword(registerRequestDto.password());
         user.setRole(UserRole.ROLE_CUSTOMER);
-        userService.createUser(user);
+        User savedUser = userService.createUser(user); // Ensure this method saves and returns the managed User
 
+        // Create and save the Customer
         Customer customer = new Customer();
         customer.setFirstName(registerRequestDto.firstName());
         customer.setLastName(registerRequestDto.lastName());
         customer.setPhoneNumber(registerRequestDto.phoneNumber());
         customer.setBsnNumber(registerRequestDto.bsnNumber());
-        customer.setUser(user);
+        customer.setUser(savedUser);
         customerRepository.save(customer);
 
-        return new LoginResponseDto(new UserDto(user.getId(), user.getEmail(), user.getRole()), jwtProvider.createToken(user));
+        return new LoginResponseDto(new UserDto(savedUser.getId(), savedUser.getEmail(), savedUser.getRole()), jwtProvider.createToken(savedUser));
     }
 
-    public Customer approveCustomer(Long userId) {
+
+    public Optional<Customer> approveCustomer(Long userId) {
         Optional<Customer> optionalCustomer = customerRepository.findById(userId);
         if (optionalCustomer.isPresent()) {
             Customer customer = optionalCustomer.get();
@@ -77,23 +82,22 @@ public class CustomerService {
             savings.setAccountType(AccountType.SAVINGS);
             accountService.createAccount(savings);
 
-            return customer;
-        } else {
-            return null;
+            return Optional.of(customer);
         }
+
+        return optionalCustomer;
     }
 
-    public Customer closeCustomer(Long customerId) {
+    public Optional<Customer> closeCustomer(Long customerId) {
         Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
         if (optionalCustomer.isPresent()) {
             Customer customer = optionalCustomer.get();
             customer.setAccountApproved(false);
             customerRepository.save(customer);
-            return customer;
-        } else {
-            return null;
+
+            return Optional.of(customer);
         }
+
+        return optionalCustomer;
     }
-
-
 }

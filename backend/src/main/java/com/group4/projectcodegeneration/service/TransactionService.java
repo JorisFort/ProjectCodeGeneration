@@ -25,9 +25,7 @@ public class TransactionService {
         this.accountService = accountService;
     }
 
-    public Transaction createTransaction(TransactionDto transaction) {
-        User user = userService.getAuthenticatedUser();
-
+    public Transaction createTransaction(TransactionDto transaction, User user) {
         Transaction newTransaction = new Transaction();
         newTransaction.setAmount(transaction.amount());
         newTransaction.setInitiatedBy(user);
