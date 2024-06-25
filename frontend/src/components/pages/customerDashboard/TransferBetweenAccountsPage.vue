@@ -9,7 +9,7 @@
 
 <script setup>
 //import Sidebar from "../CustomerNavigation.vue";
-import TransferBetweenAccountsForm from "../containers/dashboard/transaction/TransferBetweenAccountsForm.vue";
+import TransferBetweenAccountsForm from "../../containers/customerDashboard/transaction/TransferBetweenAccountsForm.vue";
 </script>
 
 <style scoped>

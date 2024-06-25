@@ -14,8 +14,6 @@
             required
             type="text"
         />
-      </div>
-      <div class="input-group">
         <label for="last-name">Last Name</label>
         <input
             id="last-name"
@@ -24,18 +22,6 @@
             required
             type="text"
         />
-      </div>
-      <div class="input-group">
-        <label for="email">Email</label>
-        <input
-            id="email"
-            v-model="email"
-            placeholder="Enter your Email"
-            required
-            type="email"
-        />
-      </div>
-      <div class="input-group">
         <label for="phoneNumber">Phone number</label>
         <input
             id="phoneNumber"
@@ -44,18 +30,6 @@
             required
             type="text"
         />
-      </div>
-      <div class="input-group">
-        <label for="password">Password</label>
-        <input
-            id="password"
-            v-model="password"
-            placeholder="Enter your Password"
-            required
-            type="password"
-        />
-      </div>
-      <div class="input-group">
         <label for="bsn">BSN</label>
         <input
             id="bsn"
@@ -63,6 +37,22 @@
             placeholder="Enter your BSN"
             required
             type="text"
+        />
+        <label for="email">Email</label>
+        <input
+            id="email"
+            v-model="email"
+            placeholder="Enter your Email"
+            required
+            type="email"
+        />
+        <label for="password">Password</label>
+        <input
+            id="password"
+            v-model="password"
+            placeholder="Enter your Password"
+            required
+            type="password"
         />
       </div>
       <div class="terms">
@@ -97,14 +87,14 @@ const acceptedTerms = ref(false);
 const error = ref("");
 
 const handleRegister = async () => {
+  error.value = ""; // Reset error message
   try {
-    error.value = ""; // Reset error message
-    const response = await register(email, password, firstName, lastName, bsn, phoneNumber);
+    const response = await register(email.value, password.value, firstName.value, lastName.value, bsn.value, phoneNumber.value);
     localStorage.setItem("jwtToken", response.token);
-    localStorage.setItem("user", response.user);
-    if (response.user.role === 'EMPLOYEE') {
+    localStorage.setItem("user", JSON.stringify(response.user));
+    if (response.user.role === 'ROLE_EMPLOYEE') {
       await router.push('/employeeDashboard');
-    } else if (response.user.role === 'CUSTOMER') {
+    } else if (response.user.role === 'ROLE_CUSTOMER') {
       await router.push('/customerDashboard');
     }
   } catch (err) {
@@ -123,6 +113,7 @@ const handleRegister = async () => {
   background: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 .input-group {
   margin-bottom: 1rem;
 }

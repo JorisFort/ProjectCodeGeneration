@@ -10,6 +10,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -91,6 +92,18 @@ public class TransactionService {
         List<Account> accounts = accountService.getAllCustomerAccounts(user.getId());
 
         return transactionRepository.findByFromAccountInOrToAccountIn(accounts, accounts);
+    }
+
+    public List<Transaction> getTransactionsByAccount(Long accountId) {
+        Account account = accountService.getAccountById(accountId).orElseThrow(() -> new EntityNotFoundException("Account with ID " + accountId + " not found"));
+        User authenticatedUser = userService.getAuthenticatedUser();
+
+        // Only the user themselves or an employee can view the transactions of a user
+        if (authenticatedUser.getRole() == UserRole.ROLE_CUSTOMER && !account.getCustomer().getUserId().equals(authenticatedUser.getId()))
+            throw new InsufficientAuthenticationException("You are not authorized to view this user's transactions.");
+
+
+        return transactionRepository.findByFromAccountInOrToAccountIn(Collections.singletonList(account), Collections.singletonList(account));
     }
 }
 

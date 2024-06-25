@@ -40,5 +40,10 @@ public class TransactionController {
     public ResponseEntity<List<Transaction>> getAllTransactionsByUser(@PathVariable Long userId) {
         return userService.getUserById(userId).map(user -> ResponseEntity.ok(transactionService.getTransactionsByUser(user))).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
+
+    @GetMapping("/account/{accountId}")
+    public ResponseEntity<List<Transaction>> getAllTransactionsByAccount(@PathVariable Long accountId) {
+        return ResponseEntity.ok(transactionService.getTransactionsByAccount(accountId));
+    }
 }
 

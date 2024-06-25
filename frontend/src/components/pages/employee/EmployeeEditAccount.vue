@@ -1,5 +1,5 @@
 <script setup>
-import EmployeeChangeAccountForm from "../containers/dashboard/EmployeeChangeAccountForm.vue";
+import EmployeeChangeAccountForm from "../../containers/employeeDashboard/EmployeeChangeAccountForm.vue";
 </script>
 
 <template>

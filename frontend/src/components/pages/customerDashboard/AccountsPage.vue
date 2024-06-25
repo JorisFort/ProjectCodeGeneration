@@ -1,18 +1,18 @@
 <template>
   <div class="dashboard">
-    <Sidebar/>
+    <Sidebar />
     <div class="main-content">
       <header class="header">
         <h1>Accounts</h1>
       </header>
-      <div v-for="account in accounts" :key="account.id" class="content">
+      <div v-for="account in accounts" :key="account.accountId" class="content">
         <div class="account-header">
           <h2>{{ account.accountType }}</h2>
           <p>Balance: € {{ account.balance }}</p>
         </div>
         <div class="account-details">
           <p><strong>IBAN:</strong> {{ account.iban }}</p>
-          <button class="view-button" @click="viewAccount(account)">View</button>
+          <button class="view-button" @click="viewAccount(account.accountId)">View</button>
         </div>
       </div>
     </div>
@@ -20,27 +20,25 @@
 </template>
 
 <script setup>
-import Sidebar from "../common/CustomerNavigation.vue";
-import {onMounted, ref} from "vue";
-import {useRouter} from "vue-router";
-import {getAllAccountsFromCustomer} from "@/services/AccountService.js";
+import Sidebar from "../../common/CustomerNavigation.vue";
+import { onMounted, ref } from "vue";
+import { useRouter } from "vue-router";
+import { getAllAccountsFromCustomer } from "@/services/AccountService.js";
 
 const accounts = ref([]);
 
 onMounted(async () => {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem("user"));
   accounts.value = await getAllAccountsFromCustomer(user.id);
+  console.log(accounts.value);
 });
 
 const router = useRouter();
 
-const viewAccount = (account) => {
-  console.log(account);
+const viewAccount = (accountId) => {
   router.push({
-    path: "/dashboard/transactions",
-    params: {
-      account: account
-    },
+    name: "Transactions",
+    params: { accountId }
   });
 };
 </script>
@@ -101,20 +99,5 @@ const viewAccount = (account) => {
 
 .view-button:hover {
   background-color: #218838;
-}
-
-
-
-.main-content {
-  flex: 1;
-  padding: 2rem;
-  background: #f7f9fc;
-}
-
-
-
-.content {
-  display: flex;
-  flex-direction: column;
 }
 </style>

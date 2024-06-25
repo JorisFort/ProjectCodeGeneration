@@ -53,7 +53,7 @@ public class ApplicationStarter implements ApplicationRunner {
         password = "123";
 
         RegisterRequestDto registerRequestDto = new RegisterRequestDto(email,
-                password, "John", "Doe", "123456789", "0612345678");
+                password, "Joris", "Fortanier", "123456789", "0612345678");
 
         LoginResponseDto loginResponseDto = customerService.register(registerRequestDto);
 

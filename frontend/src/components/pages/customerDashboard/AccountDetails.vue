@@ -3,21 +3,26 @@
     <Sidebar/>
     <div class="main-content">
       <div class="left-section">
-        <UserProfile/>
-      </div>
-      <div class="right-section">
-        <AccountBalanceUser/>
-        <RecentTransactions/>
+        <UserProfile v-if="state.customer" :customer="state.customer"/>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-//import Sidebar from "../CustomerNavigation.vue";
-import UserProfile from "../containers/dashboard/UserProfile.vue";
-import AccountBalanceUser from "../common/AccountBalanceUser.vue";
-import RecentTransactions from "../containers/dashboard/RecentTransactions.vue";
+import Sidebar from "../../common/CustomerNavigation.vue";
+import UserProfile from "../../containers/customerDashboard/UserProfile.vue";
+import {getCustomer} from "@/services/CustomerService.js";
+import {onMounted, reactive} from "vue";
+
+const state = reactive({
+  customer: null,
+});
+
+onMounted(async () => {
+  const user = JSON.parse(localStorage.getItem('user'));
+  state.customer = await getCustomer(user.id);
+});
 </script>
 
 <style scoped>

@@ -1,5 +1,5 @@
 <script setup>
-import EmployeeCustomerChangeDetailForm from "../containers/dashboard/EmployeeCustomerChangeDetailForm.vue";
+import EmployeeCustomerChangeDetailForm from "../../containers/employeeDashboard/EmployeeCustomerChangeDetailForm.vue";
 import {useRoute} from "vue-router";
 
 const id = useRoute().params.id;
