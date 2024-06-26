@@ -90,7 +90,7 @@ router.beforeEach((to, from, next) => {
         const userRole = getUserRole();
         const toRole = to.meta.role;
 
-        if (toRole && toRole !== userRole) {
+        if ((toRole && toRole !== userRole) || !toRole) {
             if (userRole === 'ROLE_EMPLOYEE') {
                 next({ path: '/employeeDashboard' });
             } else if (userRole === 'ROLE_CUSTOMER') {
