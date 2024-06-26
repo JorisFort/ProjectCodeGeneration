@@ -47,11 +47,13 @@ const props = defineProps({
 });
 
 const transactions = ref(props.transactions);
-const accountId = props.accountId;
+const accountId = Number(props.accountId);
 
 const formatDate = (timestamp) => {
   const date = new Date(timestamp);
-  return `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()} - ${date.getHours()}:${date.getMinutes()}`;
+  const minutes = date.getMinutes();
+  const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+  return `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()} - ${date.getHours()}:${formattedMinutes}`;
 };
 const formatAmount = (amount) => {
   return new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' }).format(amount);
@@ -59,9 +61,9 @@ const formatAmount = (amount) => {
 
 const determineTransaction = (transaction) => {
   if (transaction.transactionType === 'TRANSFER') {
-    if (transaction.fromAccount && transaction.fromAccount.accountId === accountId) {
+    if (transaction.fromAccount.accountId === accountId) {
       return 'withdraw';
-    } else if (transaction.toAccount && transaction.toAccount.accountId === accountId) {
+    } else if (transaction.toAccount.accountId === accountId) {
       return 'deposit';
     }
   } else if (transaction.transactionType === 'DEPOSIT') {
