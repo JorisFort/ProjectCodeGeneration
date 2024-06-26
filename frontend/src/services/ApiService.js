@@ -1,5 +1,9 @@
 export const apiCall = async (url, method, body = null) => {
     try {
+        const hostname = window.location.hostname;
+        const baseUrl = hostname === 'localhost' ? 'http://localhost:8080' : 'https://projectcodegeneration.onrender.com';
+        const fullUrl = `${baseUrl}${url}`;
+
         const options = {
             method,
             headers: {
@@ -16,7 +20,7 @@ export const apiCall = async (url, method, body = null) => {
             options.headers['Authorization'] = `Bearer ${jwtToken}`;
         }
 
-        const response = await fetch(url, options);
+        const response = await fetch(fullUrl, options);
         if (response.ok) {
             return await response.json();
         } else {
